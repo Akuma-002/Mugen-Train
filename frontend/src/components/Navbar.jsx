@@ -13,24 +13,13 @@ export default function Navbar() {
   return (
     <nav className="navbar fixed top-0 left-0 w-full z-50 flex items-center border border-slate-700 px-6 py-4 rounded-b-md text-white text-sm bg-black">
       {/* Logo */}
-      <a href="https://prebuiltui.com">
-        <svg
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx="4.706" cy="16" r="4.706" fill="#D9D9D9" />
-          <circle cx="16.001" cy="4.706" r="4.706" fill="#D9D9D9" />
-          <circle cx="16.001" cy="27.294" r="4.706" fill="#D9D9D9" />
-          <circle cx="27.294" cy="16" r="4.706" fill="#D9D9D9" />
-        </svg>
+      <a className="y-2 x-2 border rounded-full bg-white" href="/">
+        <img src="/logo.png" alt="RailBook Logo" width="40" height="40" className="h-10 w-10 object-contain" />
       </a>
 
       {/* Desktop Menu */}
       <div className="hidden md:flex items-center ml-7 space-x-6">
-        {["Home", "Book Ticket", "My Bookings", "Contact"].map((item) => (
+        {["Home", "My Bookings", "Contact"].map((item) => (
           <NavLink
             key={item}
             to={item === "Home" ? "/" : `/${item.toLowerCase().replace(/\s+/g, '-')}`}
