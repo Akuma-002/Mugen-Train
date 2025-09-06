@@ -3,8 +3,33 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background: #fff;
+  color: #222;
 }
 
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1rem;
+  background: #000000;
+  color: #f2efef;
+  border: 1px solid #e5e7eb;
+}
+.main{
+  padding: 2rem;
+  margin-top: 4rem;
+  
+}
+.trainBox{
+  padding: 2rem;
+  margin-top: 2rem;
+  background: #f9f9f9;
+  color: #222;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
