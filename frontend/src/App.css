@@ -1,7 +1,13 @@
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  padding: 0;
   text-align: center;
   background: #fff;
   color: #222;
@@ -18,9 +24,15 @@
   border: 1px solid #e5e7eb;
 }
 .main{
-  padding: 2rem;
+  padding-top: 2rem;
+  margin: 0;
   margin-top: 4rem;
-  
+}
+footer{
+  display: block;
+  width: 100%;
+  background: #000000;
+  color: #f2efef;
 }
 .trainBox{
   padding: 2rem;

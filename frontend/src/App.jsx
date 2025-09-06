@@ -10,6 +10,7 @@ import SignUp from './components/SignUp'
 import BookTicket from './components/BookTicket'
 import MyBookings from './components/MyBookings'
 import Contact from './components/Contact'
+import Footer from './components/Footer'
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
         <Route path='/my-bookings' element={<MyBookings />} />
         <Route path='/contact' element={<Contact />} />
       </Routes>
+      <Footer />
     </>
   )
 }
