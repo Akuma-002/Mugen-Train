@@ -35,10 +35,10 @@ const Home = () => {
 
   return (
     <div className="main">
-      <h1 className="text-4xl md:text-6xl font-bold text-primary mb-4 text-balance">
+      <h1 className="text-4xl md:text-6xl text-center font-bold text-primary mb-4 text-balance">
         Book Your Train Journey
       </h1>
-      <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
+      <p className="text-xl text-muted-foreground max-w-auto text-center mx-auto text-pretty m-8">
         Fast, reliable, and comfortable train travel across the country. Find and book your perfect journey today.
       </p>
       <div

@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import { LoginContext } from "./context/LoginInfo";
 export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const navigate = useNavigate();
-
+  const {login} = useContext(LoginContext);
   const toggleMobileMenu = () => {
     setIsMobileOpen((prev) => !prev);
   };
 
   return (
-    <nav className="navbar fixed top-0 left-0 w-full z-50 flex items-center border border-slate-700 px-6 py-4 rounded-b-md text-white text-sm bg-black">
+    <nav className="navbar fixed top-0 left-0 w-full z-50 flex justify-between items-center border border-slate-700 px-6 py-4 rounded-b-md text-white text-sm bg-black">
       {/* Logo */}
       <a className="y-2 x-2 border rounded-full bg-white" href="/">
         <img src="/logo.png" alt="RailBook Logo" width="40" height="40" className="h-10 w-10 object-contain" />
@@ -36,14 +36,24 @@ export default function Navbar() {
       </div>
 
       {/* Desktop Buttons */}
-  <div className="hidden ml-14 md:flex items-center space-x-8">
-        <button onClick={() => navigate('/login')} className="border border-slate-600 hover:bg-slate-800 px-4 py-2 rounded-full text-sm font-medium transition">
+      
+      <div className={`ml-14 items-center space-x-8 
+        ${login ? "hidden" : "flex md:flex"}`}>
+        <button
+          onClick={() => navigate('/login')}
+          className="border border-slate-600 hover:bg-slate-800 px-4 py-2 rounded-full text-sm font-medium transition"
+        >
           Login
         </button>
-        <button onClick={() => navigate('/signup')} className="bg-white hover:shadow-[0px_0px_30px_14px] shadow-[0px_0px_30px_7px] hover:shadow-white/50 shadow-white/50 text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-100 transition duration-300">
+        <button
+          onClick={() => navigate('/signup')}
+          className="bg-white hover:shadow-[0px_0px_30px_14px] shadow-[0px_0px_30px_7px] hover:shadow-white/50 shadow-white/50 text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-100 transition duration-300"
+        >
           Sign Up
         </button>
       </div>
+      
+
 
       {/* Mobile Toggle */}
       <button

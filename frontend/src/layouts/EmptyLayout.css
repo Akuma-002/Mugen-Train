@@ -1,0 +1,53 @@
+/* EmptyLayout.css */
+
+/* Full-screen container for pages without navbar/footer */
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* vertically center */
+  align-items: center;      /* horizontally center */
+  min-height: 100vh;        /* full viewport height */
+  width:100vw;
+  padding: 20px;
+  box-sizing: border-box;
+  /* Background image */
+  background-image: url('../assets/wallpaper.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Optional: style the form or card inside */
+/* .empty-container > * {
+  width: 100%;
+  max-width: 100%;         
+  margin: 10px 0;
+} */
+.formBox{
+  padding: 2rem;
+  margin-top: 2rem;
+  background: #f9f9f9;
+  color: White;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 30rem;
+  /* From https://css.glass */
+background: rgba(0, 0, 0, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(8px);
+-webkit-backdrop-filter: blur(5.6px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .empty-container {
+    padding: 15px;
+  }
+  .empty-container > * {
+    max-width: 100%;
+  }
+}

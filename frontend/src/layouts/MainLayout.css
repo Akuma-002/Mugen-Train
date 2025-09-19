@@ -1,0 +1,29 @@
+/* MainLayout.css */
+
+/* Main container for page content */
+.main-container {
+  padding-top: 70px;       /* space for fixed Navbar height */
+  padding-bottom: 80px;    /* space for Footer height */
+  min-height: calc(100vh - 150px); /* full height minus navbar + footer */
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f9f9f9; /* optional page background */
+}
+
+/* Optional: style all direct children of main */
+.main-container > * {
+  margin: 0 auto;
+  max-width: 1200px;      /* limit content width */
+  padding: 0 20px;        /* horizontal padding */
+}
+
+/* Make main container responsive */
+@media (max-width: 768px) {
+  .main-container {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  .main-container > * {
+    padding: 0 15px;
+  }
+}

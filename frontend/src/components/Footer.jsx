@@ -171,7 +171,7 @@ const Footer = () => {
           </div>
         </div>
   <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-primary-foreground/60 px-4">
-          <p>© 2024 Mugen Train. All rights reserved.</p>
+          <p>© 2025 Mugen Train. All rights reserved.</p>
         </div>
       </div>
     </footer>
