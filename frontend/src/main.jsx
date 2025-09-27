@@ -4,14 +4,16 @@
   import './index.css'
   import App from './App.jsx'
   import LoginInfo from './components/context/LoginInfo.jsx'
-
+import UserInfo from './components/context/UserInfo.jsx'
   createRoot(document.getElementById('root')).render(
 
     <StrictMode>
       <LoginInfo>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <UserInfo>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </UserInfo>
       </LoginInfo>
     </StrictMode>,
   )

@@ -28,7 +28,59 @@ const userSchema = new mongoose.Schema({
         required: true,
         match: [/^\d{10}$/, "Please provide a valid 10-digit phone number"],
     },
-
+    //Aadhar Number
+    aadhar: {
+        type: String,   
+        required: true,
+        unique: true,
+        match: [/^\d{12}$/, "Please provide a valid 12-digit Aadhar number"],
+    },
+    // Address
+    address: {
+        type: String,
+        default: "",
+        trim: true,
+    },
+    //Pin Code
+    pinCode: {
+        type: String,
+        default: "",
+        trim: true,
+    },
+    //Region
+    region: {
+        type: String,
+        default: "India",
+        trim: true,
+    },
+    //State
+    state: {
+        type: String,
+        default: "",
+        trim: true,
+    },
+    //City
+    city: {
+        type: String,
+        default: "",
+        trim: true,
+    },
+    //District
+    district: {
+        type: String,
+        default: "",
+        trim: true,
+    },
+    //Date of Birth
+    dob: {
+        type: Date,
+    },
+    //document verification
+    document: {
+        type: String,
+        default: "",
+        trim: true,
+    },
     // Role 
     role: {
         type: String,

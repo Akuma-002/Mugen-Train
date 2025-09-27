@@ -43,7 +43,7 @@ const Home = () => {
       </p>
       <div
         data-slot="card"
-        className="trainBox bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 max-w-4xl mx-auto shadow-lg"
+  className="trainBox bg-bg text-card-foreground flex flex-col gap-6 rounded-xl border py-6 max-w-4xl mx-auto shadow-lg"
       >
         <div
           data-slot="card-header"
@@ -257,7 +257,7 @@ const Home = () => {
           </button>
         </div>
       </div>
-      <section className="py-16 bg-muted/30">
+  <section className="py-16 bg-bg">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-primary mb-4">Popular Routes</h2>
@@ -270,7 +270,7 @@ const Home = () => {
           {/* Card 1 */}
           <div
             data-slot="card"
-            className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+            className="bg-bg text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
           >
             <div className="relative">
               <img

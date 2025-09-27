@@ -1,0 +1,21 @@
+{
+  "Maharashtra": {
+    "Mumbai": ["Mumbai City", "Mumbai Suburban"],
+    "Pune": ["Pune City", "Pimpri-Chinchwad"],
+    "Nagpur": ["Nagpur City"]
+  },
+  "Karnataka": {
+    "Bengaluru Urban": ["Bangalore"],
+    "Mysuru": ["Mysore"],
+    "Mangalore": ["Mangalore"]
+  },
+  "Delhi": {
+    "New Delhi": ["Chanakyapuri", "Connaught Place"],
+    "South Delhi": ["Saket", "Hauz Khas"]
+  },
+  "West Bengal": {
+    "Kolkata": ["Kolkata"],
+    "Howrah": ["Howrah"],
+    "Durgapur": ["Durgapur"]
+  }
+}

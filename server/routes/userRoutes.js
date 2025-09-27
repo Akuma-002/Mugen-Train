@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { signUp, login } = require('../controllers/userController'); // import your controller
+const { signUp, login, updateUser } = require('../controllers/userController'); // import your controller
 
 // Signup route
 router.post('/signup', signUp);
 router.post('/login', login);
-
+router.put('/update/:id', updateUser);
 // Optional: Get all users
 router.get('/', async (req, res) => {
   const userModel = require('../models/user');

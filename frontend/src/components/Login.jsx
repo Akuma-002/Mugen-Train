@@ -3,11 +3,14 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import LoginInfo from './context/LoginInfo';
 import { LoginContext } from './context/LoginInfo';
+import { UserContext } from './context/UserInfo';
+
 const Login = () => {
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_SERVER_API;
   console.log("Loaded API URL:", import.meta.env.VITE_SERVER_API);
   const {login, setLogin} = useContext(LoginContext);
+  const {user, setUser} = useContext(UserContext);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -36,6 +39,8 @@ const Login = () => {
       );
       if (response.data.success) {
         console.log('Login successful:', response.data);
+        setUser({...user, ...response.data.user});
+        console.log(user);
         setLogin(true);
         navigate('/');
       }
@@ -94,6 +99,7 @@ const Login = () => {
         >
           Login
         </button>
+        <p>Don't have an account <NavLink to={"/signup"}>Sign Up</NavLink></p>
       </div>
     </form>
   );

@@ -2,28 +2,31 @@ import { useContext, useState } from "react";
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from "./context/LoginInfo";
+import { UserContext } from "./context/UserInfo";
+
 export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const navigate = useNavigate();
   const {login} = useContext(LoginContext);
+  const{user} = useContext(UserContext);
   const toggleMobileMenu = () => {
     setIsMobileOpen((prev) => !prev);
   };
 
   return (
-    <nav className="navbar fixed top-0 left-0 w-full z-50 flex justify-between items-center border border-slate-700 px-6 py-4 rounded-b-md text-white text-sm bg-black">
+<nav className="fixed top-0 left-0 z-50 flex justify-between items-center px-6 py-4 text-white text-sm bg-primary w-full shadow-md">
       {/* Logo */}
-      <a className="y-2 x-2 border rounded-full bg-white" href="/">
+  <NavLink className="y-2 x-2 border-2 border-secondary rounded-full bg-white" to={"/"}>
         <img src="/logo.png" alt="RailBook Logo" width="40" height="40" className="h-10 w-10 object-contain" />
-      </a>
+      </NavLink>
 
       {/* Desktop Menu */}
-      <div className="hidden md:flex items-center ml-7 space-x-6">
+  <div className="hidden md:flex items-center ml-7 space-x-6">
         {["Home", "My Bookings", "Contact"].map((item) => (
           <NavLink
             key={item}
             to={item === "Home" ? "/" : `/${item.toLowerCase().replace(/\s+/g, '-')}`}
-            className="relative overflow-hidden h-6 group"
+            className="relative overflow-hidden h-6 group text-white hover:text-secondary"
           >
             <span className="block group-hover:-translate-y-full transition-transform duration-300">
               {item}
@@ -41,24 +44,28 @@ export default function Navbar() {
         ${login ? "hidden" : "flex md:flex"}`}>
         <button
           onClick={() => navigate('/login')}
-          className="border border-slate-600 hover:bg-slate-800 px-4 py-2 rounded-full text-sm font-medium transition"
+          className="border border-secondary text-secondary hover:bg-secondary hover:text-white px-4 py-2 rounded-full text-sm font-medium transition"
         >
           Login
         </button>
         <button
           onClick={() => navigate('/signup')}
-          className="bg-white hover:shadow-[0px_0px_30px_14px] shadow-[0px_0px_30px_7px] hover:shadow-white/50 shadow-white/50 text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-100 transition duration-300"
+          className="bg-secondary text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-secondary/80 transition duration-300"
         >
           Sign Up
         </button>
       </div>
-      
+  <div className={`userLogo ${login ? "flex md:flex" : "hidden" }`} >
+  <span><NavLink to={"/user"}><div className="avatar w-12 h-12 flex items-center justify-center border-2 border-secondary rounded-full bg-secondary text-white text-4xl font-bold">
+      <p>{user?.name?.charAt(0)?.toUpperCase() || "U"}</p>
+    </div></NavLink></span>
+  </div>
 
 
       {/* Mobile Toggle */}
       <button
         id="menuToggle"
-        className="md:hidden text-gray-600 ml-auto"
+        className="md:hidden text-secondary ml-auto"
         onClick={toggleMobileMenu}
       >
         <svg
@@ -77,21 +84,21 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div
         id="mobileMenu"
-        className={`absolute top-full left-0 bg-black w-full flex-col items-center gap-4 md:hidden text-base ${
+        className={`absolute top-full left-0 bg-primary w-full flex-col items-center gap-4 md:hidden text-base ${
           isMobileOpen ? "flex" : "hidden"
         } py-4`}
       >
         <div className="flex flex-col items-center space-y-4">
           {["Products", "Customer Stories", "Pricing", "Docs"].map((item) => (
-            <a key={item} className="hover:text-indigo-600" href="#">
+            <a key={item} className="hover:text-secondary text-white" href="#">
               {item}
             </a>
           ))}
           <div className="flex flex-col w-full items-center space-y-4">
-            <button className="border border-slate-600 hover:bg-slate-800 px-4 py-2 rounded-full text-sm font-medium transition w-full">
+            <button className="border border-secondary text-secondary hover:bg-secondary hover:text-white px-4 py-2 rounded-full text-sm font-medium transition w-full">
               Contact
             </button>
-            <button className="bg-white hover:shadow-[0px_0px_30px_14px] shadow-[0px_0px_30px_7px] hover:shadow-white/50 shadow-white/50 text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-100 transition duration-300 w-full">
+            <button className="bg-secondary text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-secondary/80 transition duration-300 w-full">
               Get Started
             </button>
           </div>

@@ -171,6 +171,7 @@ const SignUp = () => {
         >
           {loading ? 'Signing Up...' : 'Sign Up'}
         </button>
+        <p>Already have an account <NavLink to={"/login"}>Login</NavLink></p>
       </div>
     </form>
   );

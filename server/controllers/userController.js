@@ -65,6 +65,13 @@ const login = async (req, res) => {
                 email: existingUser.email,
                 phone: existingUser.phone,
                 role: existingUser.role,
+                address: existingUser.address,
+                state: existingUser.state,
+                district: existingUser.district,
+                city: existingUser.city,
+                pinCode: existingUser.pinCode,
+                dob: existingUser.dob,
+                aadhar: existingUser.aadhar
             },
         });
     } catch (error) {
@@ -75,4 +82,39 @@ const login = async (req, res) => {
 
 
 
-module.exports = { signUp, login };
+
+// Update user details
+const updateUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const updateData = req.body;
+
+        // Optional: Prevent password update here, or hash if present
+        if (updateData.password) {
+            updateData.password = await bcrypt.hash(updateData.password, 10);
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
+        if (!updatedUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.status(200).json({
+            success: true,
+            message: "User updated successfully",
+            user: {
+                id: updatedUser._id,
+                name: updatedUser.name,
+                email: updatedUser.email,
+                phone: updatedUser.phone,
+                role: updatedUser.role,
+                address: updatedUser.address,
+                state: updatedUser.state,
+                district: updatedUser.district,
+            },
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = { signUp, login, updateUser };
