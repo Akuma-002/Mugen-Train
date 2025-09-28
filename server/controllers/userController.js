@@ -71,7 +71,9 @@ const login = async (req, res) => {
                 city: existingUser.city,
                 pinCode: existingUser.pinCode,
                 dob: existingUser.dob,
-                aadhar: existingUser.aadhar
+                aadhar: existingUser.aadhar,
+                bookings: existingUser.bookings,
+                walletBalance: existingUser.walletBalance
             },
         });
     } catch (error) {

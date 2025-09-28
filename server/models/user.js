@@ -91,12 +91,28 @@ const userSchema = new mongoose.Schema({
     // Booking History 
     bookings: [
         {
-            trainId: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Train",
-            },
+            //auto generated ticket number
+            ticketNumber: { type: String, required: true, unique: true },
+            trainId: { type: mongoose.Schema.Types.ObjectId, ref: "Train", required: true },
+            trainName: { type: String, required: true },
+            trainNumber: { type: String, required: true },
             bookingDate: { type: Date, default: Date.now },
+            travelDate: { type: Date, required: true },
+            origin: { type: String, required: true },
+            originStation: { type: String, required: true },
+            destinationStation: { type: String, required: true },
+            time: { type: String, required: true },
+            
             seatNumbers: [String], // Example: ["A1", "A2"]
+            class: {
+                type: String,
+                enum: ["sleeper", "3AC", "2AC", "1AC"],
+                required: true,
+            },
+            totalFare: {
+                type: Number,
+                required: true,
+            },
             status: {
                 type: String,
             enum: ["booked", "cancelled", "completed"],

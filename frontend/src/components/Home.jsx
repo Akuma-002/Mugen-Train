@@ -232,7 +232,7 @@ const Home = () => {
           <button
             data-slot="button"
             onClick={handleSearch}
-            className="text-white inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-10 rounded-md px-6 mt-6 text-lg"
+            className="text-white inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-10 hover:text-accent1 rounded-md px-6 mt-6 text-lg"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

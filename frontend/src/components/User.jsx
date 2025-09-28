@@ -71,7 +71,52 @@ const User = () => {
               {activeTab === "upcoming" && (
                 <div>
                   <h3 className="text-xl font-semibold mb-4">Your Upcoming Trips</h3>
-                  <p>No upcoming trips booked yet. Start exploring and book your next adventure!</p>
+                  <table>
+                    <thead>
+                      <tr>
+                        {/**Train Name */}
+                        <th className='border px-4 py-2'>Train Name</th>
+                        {/**Train Number */}
+                        <th className='border px-4 py-2'>Train Number</th>
+                        {/**Ticket Number */}
+                        <th className='border px-4 py-2'>Ticket Number</th>
+                        {/**Origin train Station*/}
+                        <th className="border px-4 py-2">From</th>
+                        {/**Destination train Station*/}
+                        <th className="border px-4 py-2">To</th>
+                        {/**Booking Date */}
+                        <th className="border px-4 py-2">Booking Date</th>
+                        {/**Diparture Date */}
+                        <th className='border px-4 py-2'>Diparture Date</th>
+                        {/**Booking Status */}
+                        <th className="border px-4 py-2">Status</th>
+                      </tr>
+                    </thead>
+                    {console.log(user?.bookings)}
+                    <tbody>
+                      {user?.bookings?.length > 0 ? (
+                        [...user.bookings]
+                          .sort((a, b) => new Date(a.bookingDate) - new Date(b.bookingDate))
+                          .map((booking) => (
+                            <tr key={booking._id}>
+                            <td className="border px-4 py-2">{booking.trainName || "N/A"}</td>
+                            <td className="border px-4 py-2">{booking.trainNumber || "N/A"}</td>
+                            <td className="border px-4 py-2">{booking.ticketNumber || "N/A"}</td>
+                            {/**Origin train Station*/}
+                            <td className="border px-4 py-2">{booking.originStation || "N/A"}</td>
+                            <td className="border px-4 py-2">{booking.destinationStation || "N/A"}</td>
+                            <td className="border px-4 py-2">{new Date(booking.bookingDate).toLocaleDateString() || "N/A"}</td>
+                            <td className="border px-4 py-2">{new Date(booking.travelDate).toLocaleDateString() || "N/A"}</td>
+                            <td className="border px-4 py-2">{booking.status || "N/A"}</td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td className="border px-4 py-2 text-center" colSpan="4">No upcoming trips found.</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
                 </div>
               )}
               {activeTab === "history" && (

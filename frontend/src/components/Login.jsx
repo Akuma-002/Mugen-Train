@@ -39,8 +39,7 @@ const Login = () => {
       );
       if (response.data.success) {
         console.log('Login successful:', response.data);
-        setUser({...user, ...response.data.user});
-        console.log(user);
+        setUser(response.data.user);
         setLogin(true);
         navigate('/');
       }
@@ -95,7 +94,7 @@ const Login = () => {
         <button
           type="submit"
           disabled={checkButton()}
-          className="flex items-center justify-center gap-1 mt-5 bg-indigo-500 hover:bg-indigo-600 text-white py-2.5 w-full rounded-full transition disabled:opacity-50"
+          className="flex items-center justify-center gap-1 mt-5 bg-primary hover:bg-secondary text-white py-2.5 w-full rounded-full transition disabled:opacity-50"
         >
           Login
         </button>
