@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { UserContext } from './context/UserInfo'
-import './Ticket.css'
+import '../App.css'
 
 // Dynamic import for react-qr-code (avoids bundling issues)
 const useQRCode = () => {

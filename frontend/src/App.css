@@ -21,7 +21,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* Firefox */
 input[type=number] {
-    -moz-appearance: textfield;
+  appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 
@@ -245,11 +246,107 @@ footer{
   border-radius: 6px;
 }
 
-.printFriendly {
-  @media print {
-    .ticketActions { display: none; }
-    .ticketBox { border: none; }
-  }
+/* Ticket-specific styles (migrated from components/Ticket.css)
+   Scoped under .ticketBox to avoid collisions with other components */
+.ticketBox .ticketGrid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 18px;
+  align-items: start;
+}
+
+.ticketBox .journeyCard {
+  background: #f8fafc;
+  border: 1px solid #eef2f7;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.ticketBox .ticketTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.ticketBox .ticketSubtitle {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.ticketBox .ticketInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ticketBox .ticketRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed #f3f4f6;
+}
+
+.ticketBox .ticketMeta {
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.ticketBox .passengerList {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ticketBox .qrCard {
+  background: #fff;
+  border: 1px solid #e6eef7;
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.ticketBox .ticketActions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Keep button styles scoped so we don't affect global .btn elsewhere */
+.ticketBox .btn {
+  background: #111827;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.ticketBox .mutedSmall {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.ticketBox .jsonViewer {
+  margin-top: 12px;
+  background: #0f172a05;
+  padding: 8px;
+  border-radius: 6px;
+  max-height: 220px;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
+  font-size: 12px;
+}
+
+@media (max-width: 780px) {
+  .ticketBox .ticketGrid { grid-template-columns: 1fr; }
+}
+
+@media print {
+  /* When printing, hide ticket actions and remove borders/shadows from the ticket container */
+  .printFriendly .ticketActions { display: none !important; }
+  .printFriendly.ticketBox { box-shadow: none; border: none; }
 }
 
 
