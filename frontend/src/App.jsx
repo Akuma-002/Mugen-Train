@@ -5,6 +5,7 @@ import SignUp from './components/SignUp'
 import BookTicket from './components/BookTicket'
 import MyBookings from './components/MyBookings'
 import Contact from './components/Contact'
+import Ticket from './components/Ticket'
 import MainLayout from './layouts/MainLayout'
 import EmptyLayout from './layouts/EmptyLayout'
 import User from './components/User'
@@ -22,6 +23,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/book-ticket' element={<BookTicket />} />
           <Route path='/my-bookings' element={<MyBookings />} />
+          <Route path='/ticket/:id' element={<Ticket />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/user' element={<User />} />
           <Route path='/edit-profile' element={<EditProfile />} />

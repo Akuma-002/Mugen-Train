@@ -1,0 +1,127 @@
+/* Polished Ticket styles */
+.ticketBox {
+  padding: 1.5rem;
+  max-width: 1000px;
+  margin: 1.5rem auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+}
+
+.ticketHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.ticketTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.ticketSubtitle {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.ticketGrid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 18px;
+  align-items: start;
+}
+
+.journeyCard {
+  background: #f8fafc;
+  border: 1px solid #eef2f7;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.ticketInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ticketRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed #f3f4f6;
+}
+
+.ticketMeta {
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.passengerList {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.qrCard {
+  background: #fff;
+  border: 1px solid #e6eef7;
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.qrPlaceholder {
+  width: 120px;
+  height: 120px;
+  border: 1px dashed #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  border-radius: 6px;
+}
+
+.ticketActions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  background: #111827;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.mutedSmall {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.jsonViewer {
+  margin-top: 12px;
+  background: #0f172a05;
+  padding: 8px;
+  border-radius: 6px;
+  max-height: 220px;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
+  font-size: 12px;
+}
+
+@media (max-width: 780px) {
+  .ticketGrid { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .ticketActions { display: none !important; }
+  .ticketBox { box-shadow: none; border: none; }
+}
