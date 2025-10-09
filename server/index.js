@@ -15,10 +15,11 @@ app.use(express.json());
 
 const startServer = async () => {
     try{
-        await mongoose.connect(process.env.MONGO_URI);
+    console.log('Attempting MongoDB connection...');
+    // increase server selection timeout to give more time for DNS/connection
+    await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 30000 });
 
-        app.use("/api/users", userRoutes);
-
+    app.use("/api/users", userRoutes);
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
         });

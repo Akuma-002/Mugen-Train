@@ -91,8 +91,10 @@ const userSchema = new mongoose.Schema({
     // Booking History 
     bookings: [
         {
-            //auto generated ticket number
-            ticketNumber: { type: String, required: true, unique: true },
+            // auto generated ticket number
+            // Note: 'unique' removed because unique indexes on nested array fields can cause
+            // unexpected global uniqueness constraints and write failures when updating subdocuments.
+            ticketNumber: { type: String, required: true },
             trainId: { type: mongoose.Schema.Types.ObjectId, ref: "Train", required: true },
             trainName: { type: String, required: true },
             trainNumber: { type: String, required: true },

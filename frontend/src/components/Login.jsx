@@ -40,6 +40,9 @@ const Login = () => {
       if (response.data.success) {
         console.log('Login successful:', response.data);
         setUser(response.data.user);
+        if (response.data.token) {
+          localStorage.setItem('authToken', response.data.token);
+        }
         setLogin(true);
         navigate('/');
       }

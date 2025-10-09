@@ -29,6 +29,8 @@ const signUp = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+const jwt = require('jsonwebtoken');
+
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -56,9 +58,13 @@ const login = async (req, res) => {
             return res.status(401).json({ message: "Invalid password" });
         }
 
+        // Sign a JWT token
+        const token = jwt.sign({ id: existingUser._id, email: existingUser.email }, process.env.JWT_SECRET || 'dev-secret', { expiresIn: '7d' });
+
         res.status(200).json({
             success: true,
             message: "User logged in successfully",
+            token,
             user: {
                 id: existingUser._id,
                 name: existingUser.name,
@@ -119,4 +125,53 @@ const updateUser = async (req, res) => {
     }
 };
 
-module.exports = { signUp, login, updateUser };
+const cancelBooking = async (req, res) => {
+  try {
+    const { ticketNumber } = req.params;
+    const userId = req.userId;
+
+    if (!userId) {
+      return res.status(401).json({ message: "Unauthorized: User ID missing" });
+    }
+    if (!ticketNumber) {
+      return res.status(400).json({ message: "Ticket number is required" });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (!user.bookings || !Array.isArray(user.bookings)) {
+      return res.status(500).json({ message: "User bookings data invalid" });
+    }
+
+    // Find booking by exact ticketNumber match (consider case sensitivity as per your app needs)
+    const booking = user.bookings.find(b => b.ticketNumber === ticketNumber);
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    // Check if booking is already cancelled or completed to avoid redundant updates
+    if (booking.status === "cancelled") {
+      return res.status(400).json({ message: "Booking is already cancelled" });
+    }
+    if (booking.status === "completed") {
+      return res.status(400).json({ message: "Cannot cancel a completed booking" });
+    }
+
+    booking.status = "cancelled";
+    await user.save();
+
+    return res.json({
+      message: "Booking cancelled successfully",
+      updatedBookings: user.bookings,
+    });
+  } catch (err) {
+    console.error("Cancel booking error:", err.message, err.stack);
+    return res.status(500).json({ message: "Server error - " + err.message });
+  }
+};
+
+
+module.exports = { signUp, login, updateUser, cancelBooking };
