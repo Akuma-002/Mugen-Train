@@ -143,7 +143,7 @@ const handleCancel = async (ticketNumber) => {
           <button className="btn" onClick={handlePrint}>
             Print
           </button>
-          <button className="btn" onClick={()=>{handleCancel(booking.ticketNumber)}} disabled={processing}>
+          <button className={((booking.status === 'completed')||(booking.status === 'cancelled'))? "hidden": "btn"} onClick={()=>{handleCancel(booking.ticketNumber)}} disabled={processing}>
             {processing ? 'Cancelling…' : 'Cancel'}
           </button>
         </div>

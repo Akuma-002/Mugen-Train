@@ -18,7 +18,10 @@ const User = () => {
   const historyBookings = user?.bookings?.filter(
     (b) => new Date(b.travelDate) < today
   ) || [];
-
+  const handleView = (ticketNumber) => {
+    navigate(`/ticket/${ticketNumber}`)
+  }
+  const handlePrint = () => window.print();
   // Notification for upcoming trips within 7 days
   let notificationBanner = null;
   if (login) {
@@ -196,14 +199,9 @@ const User = () => {
                                   </span>
                                 </td>
                                 <td className="px-4 py-2 flex gap-2">
-                                  <button className="bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600 transition" title="Cancel Booking">
-                                    Cancel
-                                  </button>
-                                  <button className="bg-blue-500 text-white px-2 py-1 rounded text-xs hover:bg-blue-600 transition" title="View Ticket">
+                                  
+                                  <button className="bg-blue-500 text-white px-2 py-1 rounded text-xs hover:bg-blue-600 transition" title="View Ticket" onClick={() => handleView(booking.ticketNumber)}>
                                     View Ticket
-                                  </button>
-                                  <button className="bg-gray-500 text-white px-2 py-1 rounded text-xs hover:bg-gray-600 transition" title="Download PDF">
-                                    PDF
                                   </button>
                                 </td>
                               </tr>

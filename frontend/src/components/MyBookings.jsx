@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from './context/UserInfo'
 import { Button } from './ui/Button'
 import Spinner from './ui/Spinner'
+import axios from 'axios'
+
+const API_URL = import.meta.env.VITE_SERVER_API || ''
 
 const formatDate = (iso) => {
   try {
     const d = new Date(iso)
     return d.toLocaleString()
-  } catch (e) {
+  } catch {
     return iso
   }
 }
@@ -20,63 +23,68 @@ const MyBookings = () => {
   const [confirming, setConfirming] = useState(null)
   const [undoInfo, setUndoInfo] = useState(null)
   const undoTimer = useRef(null)
+  const [processing, setProcessing] = useState(false)
+  const navigate = useNavigate()
 
-  // Simulate initial load from context (user.bookings is populated on login)
   useEffect(() => {
-    // small timeout to show spinner briefly when navigating
-    const t = setTimeout(() => {
-      setLoading(false)
-    }, 300)
+    const t = setTimeout(() => setLoading(false), 300)
     return () => clearTimeout(t)
   }, [])
 
-  const handleCancel = (ticketNumber) => {
-    const confirmed = window.confirm('Are you sure you want to cancel this booking?')
-    if (!confirmed) return
+  const handleCancel = async (ticketNumber) => {
+    if (!ticketNumber) return
+    setProcessing(true)
+    setError(null)
 
-    // Local optimistic update: mark booking status as 'cancelled'
-    try {
-      const updated = (user.bookings || []).map((b) =>
-        b.ticketNumber === ticketNumber ? { ...b, status: 'cancelled' } : b
-      )
-      setUser({ ...user, bookings: updated })
-    } catch (err) {
-      setError('Could not update booking locally.')
+    const token = localStorage.getItem('authToken')
+    if (!token) {
+      alert('You need to be logged in to cancel bookings. Redirecting to login...')
+      navigate('/login')
+      setProcessing(false)
+      return
     }
-  }
 
-  const navigate = useNavigate()
+    const userId = user?._id || user?.id
+    if (!userId) {
+      setError('User information missing. Please login again.')
+      setProcessing(false)
+      return
+    }
 
-  const handleView = (ticketNumber) => {
-    navigate(`/ticket/${ticketNumber}`)
-  }
-
-  const confirmCancel = async (ticketNumber) => {
     // Optimistic update
     const prev = user.bookings || []
     const updated = prev.map((b) => (b.ticketNumber === ticketNumber ? { ...b, status: 'cancelled' } : b))
     setUser({ ...user, bookings: updated })
     setConfirming(null)
 
-    // Show undo option
-    setUndoInfo({ ticketNumber, message: `Cancelled ${ticketNumber}` })
-    if (undoTimer.current) clearTimeout(undoTimer.current)
-    undoTimer.current = setTimeout(() => {
-      // After undo window, call API to persist cancellation
-      persistCancel(ticketNumber).catch(() => {
-        // If persist fails, rollback
-        setUser({ ...user, bookings: prev })
-        setError('Could not cancel booking on server. Changes rolled back.')
-      })
-      setUndoInfo(null)
-    }, 5000)
+    try {
+      const res = await axios.put(
+        `${API_URL}/${userId}/cancel/${ticketNumber}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      setUser((prevUser) => ({ ...prevUser, bookings: res.data.updatedBookings }))
+
+      setUndoInfo({ ticketNumber, message: `Cancelled ${ticketNumber}` })
+      if (undoTimer.current) clearTimeout(undoTimer.current)
+      undoTimer.current = setTimeout(() => setUndoInfo(null), 5000)
+    } catch (err) {
+      setError(err.response?.data?.message || 'Error cancelling booking')
+      // Rollback optimistic update
+      setUser((prevUser) => ({ ...prevUser }))
+    } finally {
+      setProcessing(false)
+    }
   }
 
+  const handleView = (ticketNumber) => {
+    navigate(`/ticket/${ticketNumber}`)
+  }
+  
   const undoCancel = () => {
     if (!undoInfo) return
     const { ticketNumber } = undoInfo
     const prev = user.bookings || []
-    // restore the booking status back to previous (assume it was not cancelled)
     const restored = prev.map((b) => (b.ticketNumber === ticketNumber ? { ...b, status: 'confirmed' } : b))
     setUser({ ...user, bookings: restored })
     setUndoInfo(null)
@@ -86,89 +94,98 @@ const MyBookings = () => {
     }
   }
 
-  const persistCancel = async (ticketNumber) => {
-    // Use configured API base if present
-    const API_URL = import.meta.env.VITE_SERVER_API || ''
-    const url = `${API_URL}/bookings/${ticketNumber}/cancel`
-    const token = localStorage.getItem('authToken')
-    const headers = token ? { 'Authorization': `Bearer ${token}` } : {}
-    const resp = await fetch(url, { method: 'POST', headers })
-    if (!resp.ok) throw new Error('persist failed')
-    return true
-  }
-
-  if (loading) {
+  if (loading)
     return (
       <div className="p-6">
         <h2 className="text-2xl mb-4">My Bookings</h2>
-        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+        <div className="flex gap-3 items-center">
           <Spinner size={32} />
           <div>Loading bookings...</div>
         </div>
       </div>
     )
-  }
 
-  const bookings = user?.bookings || []
+  const sortedBookings = [...(user?.bookings || [])].sort((a, b) => {
+  return new Date(b.travelDate).getTime() - new Date(a.travelDate).getTime() // descending
+  })
+
 
   return (
     <div className="myBookingBox p-6 mt-5">
       <h2 className="text-4xl mb-4">My Bookings</h2>
 
-      {error && <div style={{ color: 'crimson', marginBottom: 12 }}>{error}</div>}
-      {bookings.length === 0 ? (
-        <div className="noBookings p-6" style={{ textAlign: 'left' }}>
-          <h3 style={{ marginTop: 0 }}>No bookings yet</h3>
+      {error && <div className="text-red-600 mb-3">{error}</div>}
+
+      {sortedBookings.length === 0 ? (
+        <div className="noBookings p-6 text-left">
+          <h3 className="mt-0">No bookings yet</h3>
           <p className="text-sm text-muted">Search trains and book your first ticket to see it here.</p>
-          <div style={{ marginTop: 12 }}>
-            <Button onClick={() => navigate('/')} aria-label="Search trains">Search trains</Button>
+          <div className="mt-3">
+            <Button onClick={() => navigate('/')} aria-label="Search trains">
+              Search trains
+            </Button>
           </div>
         </div>
       ) : (
-        <div className='allBookings' style={{ display: 'grid', gap: 12 }}>
-          {bookings.map((b) => (
+        <div className="allBookings grid gap-3">
+          {sortedBookings.map((b) => (
             <div
               key={b.ticketNumber}
-              className='bookingsBox'
+              className="bookingsBox"
               tabIndex={0}
               role="button"
               onClick={() => handleView(b.ticketNumber)}
-              onKeyDown={(e) => { if (e.key === 'Enter') handleView(b.ticketNumber) }}
+              onKeyDown={(e) => e.key === 'Enter' && handleView(b.ticketNumber)}
               aria-label={`Open booking ${b.ticketNumber}`}
             >
-              <div className='bookingInfo' >
-                <div className='bookingHeader' >
-                  <strong>{b.trainName} ({b.trainNumber})</strong>
-                  <span style={{ color: '#6b7280' }}>• {b.ticketNumber}</span>
-                  <span style={{ color: '#6b7280' }}>{b.class}</span>
+              <div className="bookingInfo">
+                <div className="bookingHeader">
+                  <strong>
+                    {b.trainName} ({b.trainNumber})
+                  </strong>
+                  <span className="text-gray-500 ml-2">• {b.ticketNumber}</span>
+                  <span className="text-gray-500 ml-2">{b.class}</span>
                 </div>
-                <div className='bookingDetails' >
-                  <div>{b.originStation} → {b.destinationStation}</div>
-                  <div style={{ fontSize: 13, color: '#6b7280' }}>Travel: {formatDate(b.travelDate)} • Time: {b.time}</div>
-                  <div style={{ fontSize: 13, color: '#6b7280' }}>Seats: {b.seatNumbers?.join(', ') || '—'}</div>
+                <div className="bookingDetails">
+                  <div>
+                    {b.originStation} → {b.destinationStation}
+                  </div>
+                  <div className="text-xs text-gray-500">
+                    Travel: {formatDate(b.travelDate)} • Time: {b.time}
+                  </div>
+                  <div className="text-xs text-gray-500">Seats: {b.seatNumbers?.join(', ') || '—'}</div>
                 </div>
               </div>
 
-              <div className='bookingActions' onClick={(e) => e.stopPropagation()}>
-                <div className='fareStatus' >
-                  <div style={{ fontWeight: 600 }}>₹{b.totalFare}</div>
-                  <div style={{ fontSize: 13, color: b.status === 'cancelled' ? 'crimson' : '#6b7280' }}>{b.status}</div>
+              <div className="bookingActions" onClick={(e) => e.stopPropagation()}>
+                <div className="fareStatus">
+                  <div className="font-semibold">₹{b.totalFare}</div>
+                  <div className={`text-xs ${b.status === 'cancelled' ? 'text-red-600' : 'text-gray-500'}`}>{b.status}</div>
                 </div>
 
                 {b.status !== 'cancelled' ? (
-                  <div style={{ display: 'flex', gap: 8 }}>
-                    {/* <Button className="text-white" onClick={() => handleView(b.ticketNumber)} aria-label={`View ${b.ticketNumber}`}>View</Button> */}
-                    {confirming === b.ticketNumber ? (
-                      <div style={{ display: 'flex', gap: 6 }}>
-                        <Button onClick={() => confirmCancel(b.ticketNumber)} aria-label={`Confirm cancel ${b.ticketNumber}`}>Confirm</Button>
-                        <Button onClick={() => setConfirming(null)} aria-label={`Abort cancel ${b.ticketNumber}`}>Abort</Button>
+                  <div className="flex gap-2">
+                    <Button
+                      className={`text-white ${b.status === 'completed' ? 'hidden' : ''}`}
+                      disabled={processing}
+                      onClick={() => setConfirming(b.ticketNumber)}
+                      aria-label={`Cancel ${b.ticketNumber}`}
+                    >
+                      Cancel
+                    </Button>
+                    {confirming === b.ticketNumber && (
+                      <div className="flex gap-2">
+                        <Button onClick={() => { handleCancel(b.ticketNumber); setConfirming(null) }} disabled={processing} aria-label={`Confirm cancel ${b.ticketNumber}`}>
+                          Confirm
+                        </Button>
+                        <Button onClick={() => setConfirming(null)} disabled={processing} aria-label={`Abort cancel ${b.ticketNumber}`}>
+                          Abort
+                        </Button>
                       </div>
-                    ) : (
-                      <Button className= {b.status === 'completed' ? "hidden" : "text-white"} onClick={() => setConfirming(b.ticketNumber)} aria-label={`Cancel ${b.ticketNumber}`}>Cancel</Button>
                     )}
                   </div>
                 ) : (
-                  <div style={{ color: 'crimson', fontSize: 13 }}>Cancelled</div>
+                  <div className="text-red-600 text-xs">Cancelled</div>
                 )}
               </div>
             </div>
@@ -176,13 +193,16 @@ const MyBookings = () => {
         </div>
       )}
 
-      {/* Undo toast */}
       {undoInfo && (
-        <div className="undoToast" style={{ position: 'fixed', right: 20, bottom: 20, background: '#111827', color: '#fff', padding: 12, borderRadius: 8 }}>
-          <div style={{ marginBottom: 8 }}>{undoInfo.message}</div>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <Button onClick={() => undoCancel()} aria-label="Undo cancel">Undo</Button>
-            <Button onClick={() => setUndoInfo(null)} aria-label="Dismiss">Dismiss</Button>
+        <div className="undoToast fixed right-5 bottom-5 bg-gray-900 text-white p-3 rounded-md">
+          <div className="mb-2">{undoInfo.message}</div>
+          <div className="flex gap-2">
+            <Button onClick={undoCancel} aria-label="Undo cancel" disabled={processing}>
+              Undo
+            </Button>
+            <Button onClick={() => setUndoInfo(null)} aria-label="Dismiss" disabled={processing}>
+              Dismiss
+            </Button>
           </div>
         </div>
       )}
