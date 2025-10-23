@@ -1,194 +1,173 @@
-[
-  {
-    "trainId": "TRN1001",
-    "trainNumber": "12301",
-    "trainName": "Rajdhani Express",
-    "trainType": "Superfast",
-    "from": "NDLS",
-    "to": "HWH",
-    "distanceKm": 1530,
-    "averageSpeedKmph": 90,
-    "durationHrs": 17,
-    "departureTime": "16:55",
-    "arrivalTime": "09:55",
-    "daysOfOperation": ["Mon", "Wed", "Fri"],
-    "classes": {
-      "1A": { "availableSeats": 25, "totalSeats": 30, "fare": 4800 },
-      "2A": { "availableSeats": 50, "totalSeats": 60, "fare": 2800 },
-      "3A": { "availableSeats": 100, "totalSeats": 120, "fare": 1900 },
-      "SL": { "availableSeats": 200, "totalSeats": 220, "fare": 600 }
+{
+  "trains": [
+    {
+      "train_number": "12001",
+      "train_name": "Shatabdi Express",
+      "source": "NDLS",
+      "destination": "BPL",
+      "type": "Superfast",
+      "duration_hours": 8,
+      "duration_minutes": 40,
+      "days_of_operation": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      "route": [
+        {
+          "station_code": "NDLS",
+          "station_name": "New Delhi",
+          "arrival": "00:00",
+          "departure": "06:00",
+          "distance_km": 0
+        },
+        {
+          "station_code": "AGC",
+          "station_name": "Agra Cantt",
+          "arrival": "08:10",
+          "departure": "08:20",
+          "distance_km": 188
+        },
+        {
+          "station_code": "GWL",
+          "station_name": "Gwalior",
+          "arrival": "09:50",
+          "departure": "10:00",
+          "distance_km": 305
+        },
+        {
+          "station_code": "BPL",
+          "station_name": "Bhopal Junction",
+          "arrival": "14:30",
+          "departure": "00:00",
+          "distance_km": 708
+        }
+      ],
+      "classes": {
+        "CC": {
+          "class_name": "Chair Car",
+          "available_seats": 120,
+          "fare": 950
+        },
+        "EC": {
+          "class_name": "Executive Chair Car",
+          "available_seats": 45,
+          "fare": 1750
+        }
+      }
+    },
+    {
+      "train_number": "12951",
+      "train_name": "Mumbai Rajdhani Express",
+      "source": "MMCT",
+      "destination": "NDLS",
+      "type": "Rajdhani",
+      "days_of_operation": ["Daily"],
+      "route": [
+        {
+          "station_code": "MMCT",
+          "station_name": "Mumbai Central",
+          "arrival": "00:00",
+          "departure": "16:00",
+          "distance_km": 0
+        },
+        {
+          "station_code": "BRC",
+          "station_name": "Vadodara Junction",
+          "arrival": "19:10",
+          "departure": "19:20",
+          "distance_km": 392
+        },
+        {
+          "station_code": "RTM",
+          "station_name": "Ratlam Junction",
+          "arrival": "22:00",
+          "departure": "22:05",
+          "distance_km": 635
+        },
+        {
+          "station_code": "NDLS",
+          "station_name": "New Delhi",
+          "arrival": "08:35",
+          "departure": "00:00",
+          "distance_km": 1384
+        }
+      ],
+      "classes": {
+        "1A": {
+          "class_name": "First AC",
+          "available_seats": 18,
+          "fare": 4500
+        },
+        "2A": {
+          "class_name": "Second AC",
+          "available_seats": 60,
+          "fare": 2600
+        },
+        "3A": {
+          "class_name": "Third AC",
+          "available_seats": 110,
+          "fare": 1800
+        }
+      }
+    },
+    {
+      "train_number": "12627",
+      "train_name": "Karnataka Express",
+      "source": "SBC",
+      "destination": "NDLS",
+      "type": "Mail/Express",
+      "days_of_operation": ["Daily"],
+      "route": [
+        {
+          "station_code": "SBC",
+          "station_name": "KSR Bengaluru",
+          "arrival": "00:00",
+          "departure": "19:20",
+          "distance_km": 0
+        },
+        {
+          "station_code": "DMM",
+          "station_name": "Dharmavaram",
+          "arrival": "22:00",
+          "departure": "22:05",
+          "distance_km": 177
+        },
+        {
+          "station_code": "NGP",
+          "station_name": "Nagpur Junction",
+          "arrival": "08:10",
+          "departure": "08:20",
+          "distance_km": 1255
+        },
+        {
+          "station_code": "BPL",
+          "station_name": "Bhopal Junction",
+          "arrival": "14:15",
+          "departure": "14:25",
+          "distance_km": 1631
+        },
+        {
+          "station_code": "NDLS",
+          "station_name": "New Delhi",
+          "arrival": "07:50",
+          "departure": "00:00",
+          "distance_km": 2367
+        }
+      ],
+      "classes": {
+        "SL": {
+          "class_name": "Sleeper",
+          "available_seats": 320,
+          "fare": 750
+        },
+        "3A": {
+          "class_name": "Third AC",
+          "available_seats": 120,
+          "fare": 1600
+        },
+        "2A": {
+          "class_name": "Second AC",
+          "available_seats": 60,
+          "fare": 2400
+        }
+      }
     }
-  },
-  {
-    "trainId": "TRN1002",
-    "trainNumber": "12951",
-    "trainName": "Mumbai Rajdhani Express",
-    "trainType": "Superfast",
-    "from": "BCT",
-    "to": "NDLS",
-    "distanceKm": 1380,
-    "averageSpeedKmph": 92,
-    "durationHrs": 15.5,
-    "departureTime": "16:00",
-    "arrivalTime": "07:55",
-    "daysOfOperation": ["Daily"],
-    "classes": {
-      "1A": { "availableSeats": 18, "totalSeats": 24, "fare": 4650 },
-      "2A": { "availableSeats": 45, "totalSeats": 60, "fare": 2700 },
-      "3A": { "availableSeats": 90, "totalSeats": 110, "fare": 1750 },
-      "SL": { "availableSeats": 180, "totalSeats": 200, "fare": 550 }
-    }
-  },
-  {
-    "trainId": "TRN1003",
-    "trainNumber": "12627",
-    "trainName": "Karnataka Express",
-    "trainType": "Mail Express",
-    "from": "SBC",
-    "to": "NDLS",
-    "distanceKm": 2400,
-    "averageSpeedKmph": 60,
-    "durationHrs": 40,
-    "departureTime": "19:20",
-    "arrivalTime": "11:45",
-    "daysOfOperation": ["Daily"],
-    "classes": {
-      "1A": { "availableSeats": 20, "totalSeats": 25, "fare": 5100 },
-      "2A": { "availableSeats": 60, "totalSeats": 70, "fare": 2900 },
-      "3A": { "availableSeats": 120, "totalSeats": 130, "fare": 1900 },
-      "SL": { "availableSeats": 250, "totalSeats": 260, "fare": 750 }
-    }
-  },
-  {
-    "trainId": "TRN1004",
-    "trainNumber": "12246",
-    "trainName": "Duronto Express",
-    "trainType": "Duronto",
-    "from": "HWH",
-    "to": "YPR",
-    "distanceKm": 1950,
-    "averageSpeedKmph": 80,
-    "durationHrs": 29,
-    "departureTime": "10:50",
-    "arrivalTime": "15:00",
-    "daysOfOperation": ["Tue", "Thu", "Sun"],
-    "classes": {
-      "1A": { "availableSeats": 10, "totalSeats": 12, "fare": 5200 },
-      "2A": { "availableSeats": 40, "totalSeats": 50, "fare": 3000 },
-      "3A": { "availableSeats": 90, "totalSeats": 100, "fare": 2100 }
-    }
-  },
-  {
-    "trainId": "TRN1005",
-    "trainNumber": "12028",
-    "trainName": "Shatabdi Express",
-    "trainType": "Shatabdi",
-    "from": "MAS",
-    "to": "MYS",
-    "distanceKm": 500,
-    "averageSpeedKmph": 70,
-    "durationHrs": 7,
-    "departureTime": "06:00",
-    "arrivalTime": "13:00",
-    "daysOfOperation": ["Daily"],
-    "classes": {
-      "EC": { "availableSeats": 30, "totalSeats": 40, "fare": 1450 },
-      "CC": { "availableSeats": 100, "totalSeats": 120, "fare": 900 }
-    }
-  },
-  {
-    "trainId": "TRN1006",
-    "trainNumber": "12622",
-    "trainName": "Tamil Nadu Express",
-    "trainType": "Superfast",
-    "from": "NDLS",
-    "to": "MAS",
-    "distanceKm": 2200,
-    "averageSpeedKmph": 67,
-    "durationHrs": 33,
-    "departureTime": "22:30",
-    "arrivalTime": "07:00",
-    "daysOfOperation": ["Daily"],
-    "classes": {
-      "1A": { "availableSeats": 12, "totalSeats": 20, "fare": 5100 },
-      "2A": { "availableSeats": 55, "totalSeats": 65, "fare": 2950 },
-      "3A": { "availableSeats": 110, "totalSeats": 120, "fare": 1850 },
-      "SL": { "availableSeats": 250, "totalSeats": 270, "fare": 700 }
-    }
-  },
-  {
-    "trainId": "TRN1007",
-    "trainNumber": "12629",
-    "trainName": "Mysuru Express",
-    "trainType": "Express",
-    "from": "SBC",
-    "to": "MAS",
-    "distanceKm": 500,
-    "averageSpeedKmph": 65,
-    "durationHrs": 8,
-    "departureTime": "08:00",
-    "arrivalTime": "16:00",
-    "daysOfOperation": ["Mon", "Wed", "Fri", "Sun"],
-    "classes": {
-      "2A": { "availableSeats": 50, "totalSeats": 60, "fare": 2500 },
-      "3A": { "availableSeats": 100, "totalSeats": 120, "fare": 1600 },
-      "SL": { "availableSeats": 200, "totalSeats": 220, "fare": 500 }
-    }
-  },
-  {
-    "trainId": "TRN1008",
-    "trainNumber": "12433",
-    "trainName": "Jan Shatabdi Express",
-    "trainType": "Shatabdi",
-    "from": "NDLS",
-    "to": "LKO",
-    "distanceKm": 500,
-    "averageSpeedKmph": 70,
-    "durationHrs": 7,
-    "departureTime": "06:30",
-    "arrivalTime": "13:30",
-    "daysOfOperation": ["Tue", "Thu", "Sat"],
-    "classes": {
-      "CC": { "availableSeats": 100, "totalSeats": 120, "fare": 800 },
-      "EC": { "availableSeats": 30, "totalSeats": 40, "fare": 1300 }
-    }
-  },
-  {
-    "trainId": "TRN1009",
-    "trainNumber": "12201",
-    "trainName": "Bangalore Mail",
-    "trainType": "Mail Express",
-    "from": "SBC",
-    "to": "NDLS",
-    "distanceKm": 2400,
-    "averageSpeedKmph": 65,
-    "durationHrs": 36,
-    "departureTime": "20:00",
-    "arrivalTime": "08:00",
-    "daysOfOperation": ["Daily"],
-    "classes": {
-      "2A": { "availableSeats": 55, "totalSeats": 60, "fare": 2900 },
-      "3A": { "availableSeats": 120, "totalSeats": 130, "fare": 1800 },
-      "SL": { "availableSeats": 250, "totalSeats": 260, "fare": 750 }
-    }
-  },
-  {
-    "trainId": "TRN1010",
-    "trainNumber": "12280",
-    "trainName": "Howrah Duronto",
-    "trainType": "Duronto",
-    "from": "HWH",
-    "to": "NDLS",
-    "distanceKm": 1530,
-    "averageSpeedKmph": 85,
-    "durationHrs": 17,
-    "departureTime": "17:00",
-    "arrivalTime": "10:00",
-    "daysOfOperation": ["Mon", "Wed", "Fri"],
-    "classes": {
-      "1A": { "availableSeats": 10, "totalSeats": 12, "fare": 5200 },
-      "2A": { "availableSeats": 40, "totalSeats": 50, "fare": 3000 },
-      "3A": { "availableSeats": 90, "totalSeats": 100, "fare": 2100 }
-    }
-  }
-]
+  ]
+}
