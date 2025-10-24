@@ -10,6 +10,7 @@ import MainLayout from './layouts/MainLayout'
 import EmptyLayout from './layouts/EmptyLayout'
 import User from './components/User'
 import EditProfile from './components/EditProfile'
+import Trains from './components/Trains'
 import './App.css'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,6 +28,7 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route path='/user' element={<User />} />
           <Route path='/edit-profile' element={<EditProfile />} />
+          <Route path='/trains' element={<Trains />} />
         </Route>
 
         {/* Pages without Navbar & Footer */}

@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { TrainListContext } from './context/TrainList';
+import { useNavigate } from 'react-router-dom';
 const TRAIN_URL = import.meta.env.VITE_TRAIN_SERVER_API;
 const Home = () => {
   const { trains, setTrains } = useContext(TrainListContext);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     from: '',
     to: '',
@@ -28,6 +30,8 @@ const Home = () => {
   .then((res) => {console.log(res.data)
     setTrains(res.data);
     console.log(trains);
+    // Navigate to trains page without reloading
+    navigate('/trains');
   }
   )
   .catch(err => console.error(err));
