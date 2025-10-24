@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import LoginInfo from './context/LoginInfo';
 import { LoginContext } from './context/LoginInfo';
 import { UserContext } from './context/UserInfo';
 

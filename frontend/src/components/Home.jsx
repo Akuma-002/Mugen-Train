@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-
+import React, { useContext, useState } from 'react';
+import axios from 'axios';
+import { TrainListContext } from './context/TrainList';
+const TRAIN_URL = import.meta.env.VITE_TRAIN_SERVER_API;
 const Home = () => {
+  const { trains, setTrains } = useContext(TrainListContext);
   const [formData, setFormData] = useState({
     from: '',
     to: '',
@@ -17,10 +20,17 @@ const Home = () => {
     }));
   };
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     // Example: just log the form data on button click
     console.log('Search data:', formData);
     alert(`Searching trains from ${formData.from} to ${formData.to} on ${formData.date}`);
+    await axios.post(`${TRAIN_URL}/trains/all`, formData) // use params for GET query
+  .then((res) => {console.log(res.data)
+    setTrains(res.data);
+    console.log(trains);
+  }
+  )
+  .catch(err => console.error(err));
   };
 
   // Handler to fill form with card route

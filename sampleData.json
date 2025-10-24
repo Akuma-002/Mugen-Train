@@ -8,6 +8,8 @@
       "type": "Superfast",
       "duration_hours": 8,
       "duration_minutes": 40,
+      "from_routes": ["Delhi", "Agra", "Gwalior", "Bhopal", "Jhansi", "Kanpur", "Lucknow", "Varanasi", "Patna", "Mughalsarai", "Gaya", "Dhanbad", "Asansol"],
+      "to_routes": ["Bhopal", "Gwalior", "Agra", "Kanpur", "Lucknow", "Varanasi", "Patna", "Mughalsarai", "Gaya", "Dhanbad", "Asansol", "Howrah"],
       "days_of_operation": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
       "route": [
         {
