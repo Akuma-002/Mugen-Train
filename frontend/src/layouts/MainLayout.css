@@ -4,11 +4,12 @@
 .main-container {
   padding: 0;     /* space for fixed Navbar height */
   margin: 0;
-  padding-bottom: 80px;    /* space for Footer height */
+  /* padding-bottom: 80px;    space for Footer height */
   min-height: calc(100vh - 150px); /* full height minus navbar + footer */
   width: 100%;
   box-sizing: border-box;
   background-color: #f9f9f9; /* optional page background */
+  overflow: hidden;
 }
 
 /* Optional: style all direct children of main */

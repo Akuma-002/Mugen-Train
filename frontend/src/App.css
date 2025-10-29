@@ -24,7 +24,9 @@ input[type=number] {
   appearance: textfield;
   -moz-appearance: textfield;
 }
-
+body{
+  /* overflow: hidden; */
+}
 main{
   min-height: 100vh;
   display: block;
@@ -34,26 +36,20 @@ main{
   padding: 1rem;
   background: #fff;
   color: #222;
-  overflow: hidden;
 }
 .subMain{
   position: relative;
-  top: 200px;
+  top: 100px;
   width: 100vw;
-  height: calc(100vh - 4rem); /* ensure scrollable space */
   padding-top: 8rem;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-.subMain {
-  overflow-y: scroll;     /* keeps scroll functional */
-  scrollbar-width: none;  /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
 }
 
-.subMain::-webkit-scrollbar {
-  display: none;          /* Chrome, Safari, Opera */
+.cardT{
+  width: 15rem;
+  height: 16rem;
+  padding: 0;
 }
+
 .navbar{
   display: flex;
   justify-content: space-between;
@@ -70,7 +66,7 @@ main{
   margin-top: 4rem;
   padding: 0;
   max-width: 100%;
-  background-image:url("./assets/wp11879211.jpg");
+  background-image:url("./assets/wallpaper1.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -78,6 +74,12 @@ main{
   color: #222;
 
 }
+.cardIMG img{
+  width: 100%;
+  height: 8rem;
+  object-fit: cover;
+}
+
 footer{
   display: block;
   width: 100%;
@@ -91,6 +93,9 @@ footer{
   color: #222;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
+  position: sticky;
+  top: -8rem;
+  z-index: 5;
 }
 
 .userMainBox{
@@ -569,7 +574,7 @@ footer{
   }
 }
 
-.card {
+.card{
   padding: 2em;
 }
 

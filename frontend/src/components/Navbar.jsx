@@ -14,7 +14,7 @@ export default function Navbar() {
   };
 
   return (
-<nav className="fixed top-0 left-0 z-50 flex justify-between items-center px-6 py-4 text-white text-sm bg-transparent w-full shadow-md">
+<nav className="fixed top-0 left-0 z-50 flex justify-between items-center px-6 py-4 text-white text-sm bg-transparent w-full">
       {/* Logo */}
   <NavLink className="y-2 x-2 border-2 border-secondary rounded-full bg-white" to={"/"}>
         <img src="/logo.png" alt="RailBook Logo" width="40" height="40" className="h-10 w-10 object-contain" />
@@ -26,7 +26,7 @@ export default function Navbar() {
           <NavLink
             key={item}
             to={item === "Home" ? "/" : `/${item.toLowerCase().replace(/\s+/g, '-')}`}
-            className="relative overflow-hidden h-6 group text-white hover:text-secondary"
+            className="relative overflow-hidden h-6 group text-black hover:text-secondary"
           >
             <span className="block group-hover:-translate-y-full transition-transform duration-300">
               {item}

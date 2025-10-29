@@ -274,8 +274,8 @@ const Home = () => {
           </button>
         </div>
       </div>
-  <section className="py-16 bg-bg">
-      <div className="container mx-auto px-4">
+  <section className="py-5 bg">
+      <div className="container mx-auto px-4 pb-2 pt-20">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-primary mb-4">Popular Routes</h2>
           <p className="text-muted-foreground max-w-2xl text-white mx-auto">
@@ -283,23 +283,23 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 pb-20 mb-20" >
           {/* Card 1 */}
           <div
             data-slot="card"
-            className=" bg-white text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+            className=" bg-white text-card-foreground flex flex-col gap-1 rounded-xl pb-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group cardT"
           >
-            <div className="relative">
+            <div className="relative cardIMG">
               <img
                 alt="Mumbai to Delhi"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-25 object-cover group-hover:scale-105 transition-transform duration-300"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQPrhV8E_9NYDUcgRAyxXJASpViq0Hrt50RdeV85KtgXDWMBfyb_uLswLDcrURmGkbNHA&usqp=CAU" // Mumbai-Delhi Rajdhani Express
               />
               <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
                 <span className="font-semibold text-primary">₹1,500</span>
               </div>
             </div>
-            <div data-slot="card-content" className="p-6">
+            <div data-slot="card-content" className="px-6">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-semibold text-lg">Mumbai</h3>
                 <svg
@@ -350,9 +350,9 @@ const Home = () => {
           {/* Card 2 */}
           <div
             data-slot="card"
-            className="bg-card bg-white text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+            className="bg-card cardT bg-white text-card-foreground flex flex-col gap-1 rounded-xl pb-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
           >
-            <div className="relative">
+            <div className="relative cardIMG">
               <img
                 alt="Chennai to Bengaluru"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
@@ -362,7 +362,7 @@ const Home = () => {
                 <span className="font-semibold text-primary">₹900</span>
               </div>
             </div>
-            <div data-slot="card-content" className="p-6">
+            <div data-slot="card-content" className="px-6">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-semibold text-lg">Chennai</h3>
                 <svg
@@ -413,9 +413,9 @@ const Home = () => {
           {/* Card 3 */}
           <div
             data-slot="card"
-            className="bg-card bg-white text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+            className="bg-card cardT bg-white text-card-foreground flex flex-col gap-1 rounded-xl pb-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
           >
-            <div className="relative">
+            <div className="relative cardIMG">
               <img
                 alt="Kolkata to Guwahati"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
@@ -425,7 +425,7 @@ const Home = () => {
                 <span className="font-semibold text-primary">₹1,200</span>
               </div>
             </div>
-            <div data-slot="card-content" className="p-6">
+            <div data-slot="card-content" className="px-6">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-semibold text-lg">Kolkata</h3>
                 <svg
@@ -474,11 +474,11 @@ const Home = () => {
           </div>
 
           {/* Card 4 */}
-          <div
+          {/* <div
             data-slot="card"
-            className="bg-card bg-white text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+            className="bg-card cardT bg-white text-card-foreground flex flex-col gap-1 rounded-xl pb-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
           >
-            <div className="relative">
+            <div className="relative cardIMG">
               <img
                 alt="Hyderabad to Visakhapatnam"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
@@ -488,7 +488,7 @@ const Home = () => {
                 <span className="font-semibold text-primary">₹1,000</span>
               </div>
             </div>
-            <div data-slot="card-content" className="p-6">
+            <div data-slot="card-content" className="px-6">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-semibold text-lg">Hyderabad</h3>
                 <svg
@@ -534,14 +534,14 @@ const Home = () => {
                 Book Now
               </button>
             </div>
-          </div>
+          </div> */}
 
           {/* Card 5 */}
-          <div
+          {/* <div
             data-slot="card"
-            className="bg-card bg-white text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+            className="bg-card cardT bg-white text-card-foreground flex flex-col gap-1 rounded-xl pb-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
           >
-            <div className="relative">
+            <div className="relative cardIMG">
               <img
                 alt="Ahmedabad to Jaipur"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
@@ -551,7 +551,7 @@ const Home = () => {
                 <span className="font-semibold text-primary">₹800</span>
               </div>
             </div>
-            <div data-slot="card-content" className="p-6">
+            <div data-slot="card-content" className="px-6">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-semibold text-lg">Ahmedabad</h3>
                 <svg
@@ -597,14 +597,14 @@ const Home = () => {
                 Book Now
               </button>
             </div>
-          </div>
+          </div> */}
 
           {/* Card 6 */}
-          <div
+          {/* <div
             data-slot="card"
-            className="bg-card bg-white text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+            className="bg-card cardT bg-white text-card-foreground flex flex-col gap-1 rounded-xl pb-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
           >
-            <div className="relative">
+            <div className="relative cardIMG">
               <img
                 alt="Pune to Goa"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
@@ -614,7 +614,7 @@ const Home = () => {
                 <span className="font-semibold text-primary">₹700</span>
               </div>
             </div>
-            <div data-slot="card-content" className="p-6">
+            <div data-slot="card-content" className="px-6">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-semibold text-lg">Pune</h3>
                 <svg
@@ -660,15 +660,15 @@ const Home = () => {
                 Book Now
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
-     <section className="py-16">
+     {/* <section className="py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-primary mb-4">Why Choose RailBook?</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold text-white mb-4">Why Choose RailBook?</h2>
+          <p className="text-muted-foreground text-white max-w-2xl mx-auto">
             Experience the best in train travel with our premium services and amenities
           </p>
         </div>
@@ -745,7 +745,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </section>
+    </section> */}
     </div>
     </div>
     </>
