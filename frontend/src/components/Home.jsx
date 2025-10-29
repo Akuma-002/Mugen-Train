@@ -48,8 +48,11 @@ const Home = () => {
   };
 
   return (
+    <>
+    <div className="wallpaper"></div>
     <div className="main">
-      <h1 className="text-4xl md:text-6xl text-center font-bold text-primary mb-4 text-balance">
+      <div className='subMain'>
+      <h1 className="text-4xl md:text-6xl text-center font-bold text-white mb-4 text-balance">
         Book Your Train Journey
       </h1>
       <p className="text-xl text-muted-foreground max-w-auto text-center mx-auto text-pretty m-8">
@@ -744,6 +747,8 @@ const Home = () => {
       </div>
     </section>
     </div>
+    </div>
+    </>
   );
 };
 

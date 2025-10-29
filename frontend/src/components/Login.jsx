@@ -3,7 +3,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { LoginContext } from './context/LoginInfo';
 import { UserContext } from './context/UserInfo';
-
 const Login = () => {
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_SERVER_API;
@@ -57,7 +56,7 @@ const Login = () => {
       onSubmit={handleSubmit}
     >
       <h1 className="text-4xl font-bold py-4 text-center">
-        <NavLink to="/" className="text-black">
+        <NavLink to="/" className="text-wheat-500 hover:text-wheat-700">
           Login
         </NavLink>
       </h1>

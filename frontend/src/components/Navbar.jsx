@@ -14,7 +14,7 @@ export default function Navbar() {
   };
 
   return (
-<nav className="fixed top-0 left-0 z-50 flex justify-between items-center px-6 py-4 text-white text-sm bg-primary w-full shadow-md">
+<nav className="fixed top-0 left-0 z-50 flex justify-between items-center px-6 py-4 text-white text-sm bg-transparent w-full shadow-md">
       {/* Logo */}
   <NavLink className="y-2 x-2 border-2 border-secondary rounded-full bg-white" to={"/"}>
         <img src="/logo.png" alt="RailBook Logo" width="40" height="40" className="h-10 w-10 object-contain" />
