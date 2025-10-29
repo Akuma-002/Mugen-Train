@@ -40,12 +40,20 @@ main{
   position: relative;
   top: 200px;
   width: 100vw;
-  
+  height: calc(100vh - 4rem); /* ensure scrollable space */
   padding-top: 8rem;
   overflow-y: auto;
   overflow-x: hidden;
 }
+.subMain {
+  overflow-y: scroll;     /* keeps scroll functional */
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
 
+.subMain::-webkit-scrollbar {
+  display: none;          /* Chrome, Safari, Opera */
+}
 .navbar{
   display: flex;
   justify-content: space-between;

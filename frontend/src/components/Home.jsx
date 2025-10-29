@@ -55,7 +55,7 @@ const Home = () => {
       <h1 className="text-4xl md:text-6xl text-center font-bold text-white mb-4 text-balance">
         Book Your Train Journey
       </h1>
-      <p className="text-xl text-muted-foreground max-w-auto text-center mx-auto text-pretty m-8">
+      <p className="text-xl text-white text-muted-foreground max-w-auto text-center mx-auto text-pretty m-8">
         Fast, reliable, and comfortable train travel across the country. Find and book your perfect journey today.
       </p>
       <div
@@ -278,7 +278,7 @@ const Home = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-primary mb-4">Popular Routes</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl text-white mx-auto">
             Discover our most traveled destinations and book your journey with confidence
           </p>
         </div>
@@ -287,7 +287,7 @@ const Home = () => {
           {/* Card 1 */}
           <div
             data-slot="card"
-            className="bg-bg text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+            className=" bg-white text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
           >
             <div className="relative">
               <img
@@ -350,7 +350,7 @@ const Home = () => {
           {/* Card 2 */}
           <div
             data-slot="card"
-            className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+            className="bg-card bg-white text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
           >
             <div className="relative">
               <img
@@ -413,7 +413,7 @@ const Home = () => {
           {/* Card 3 */}
           <div
             data-slot="card"
-            className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+            className="bg-card bg-white text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
           >
             <div className="relative">
               <img
@@ -476,7 +476,7 @@ const Home = () => {
           {/* Card 4 */}
           <div
             data-slot="card"
-            className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+            className="bg-card bg-white text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
           >
             <div className="relative">
               <img
@@ -539,7 +539,7 @@ const Home = () => {
           {/* Card 5 */}
           <div
             data-slot="card"
-            className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+            className="bg-card bg-white text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
           >
             <div className="relative">
               <img
@@ -602,7 +602,7 @@ const Home = () => {
           {/* Card 6 */}
           <div
             data-slot="card"
-            className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+            className="bg-card bg-white text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
           >
             <div className="relative">
               <img
