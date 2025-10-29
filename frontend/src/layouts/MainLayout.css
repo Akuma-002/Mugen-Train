@@ -14,8 +14,8 @@
 
 /* Optional: style all direct children of main */
 .main-container > * {
-  margin: 0 auto;      /* limit content width */
-  padding: 0 ;        /* horizontal padding */
+  margin: 0 auto;     
+  padding: 0 ;         
 }
 
 /* Make main container responsive */

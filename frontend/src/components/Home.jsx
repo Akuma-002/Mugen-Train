@@ -1,10 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { TrainListContext } from './context/TrainList';
 import { useNavigate } from 'react-router-dom';
+import { DesignContext } from './context/DesignInfo';
+
 const TRAIN_URL = import.meta.env.VITE_TRAIN_SERVER_API;
 const Home = () => {
   const { trains, setTrains } = useContext(TrainListContext);
+  const {setDesign} = useContext(DesignContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     from: '',
@@ -13,6 +16,9 @@ const Home = () => {
     trainClass: '',
     passengers: 1,
   });
+  useEffect(() => {
+  setDesign((prev) => ({ ...prev, navbarColor: "bg-transparent" , navTextColor: "text-black"}));
+}, [setDesign]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;

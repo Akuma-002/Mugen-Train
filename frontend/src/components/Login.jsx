@@ -95,7 +95,7 @@ const Login = () => {
         <button
           type="submit"
           disabled={checkButton()}
-          className="flex items-center justify-center gap-1 mt-5 bg-primary hover:bg-secondary text-white py-2.5 w-full rounded-full transition disabled:opacity-50"
+          className="flex items-center justify-center gap-1 mt-5 bg-primary hover:bg-secondary text-white hover:text-white py-2.5 w-full rounded-full transition disabled:opacity-50"
         >
           Login
         </button>

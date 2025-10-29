@@ -4,8 +4,8 @@ import { UserContext } from './context/UserInfo'
 import { Button } from './ui/Button'
 import Spinner from './ui/Spinner'
 import axios from 'axios'
-
-const API_URL = import.meta.env.VITE_SERVER_API || ''
+import { DesignContext } from './context/DesignInfo'
+const API_URL = import.meta.env.VITE_SERVER_API || '/api'
 
 const formatDate = (iso) => {
   try {
@@ -17,7 +17,8 @@ const formatDate = (iso) => {
 }
 
 const MyBookings = () => {
-  const { user, setUser } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext);
+  const {setDesign} = useContext(DesignContext);
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [confirming, setConfirming] = useState(null)
@@ -25,11 +26,12 @@ const MyBookings = () => {
   const undoTimer = useRef(null)
   const [processing, setProcessing] = useState(false)
   const navigate = useNavigate()
-
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 300)
-    return () => clearTimeout(t)
-  }, [])
+    // use a valid Tailwind class (e.g. bg-red-500) or a fallback like 'bg-black/70'
+    setDesign((prev) => ({ ...prev, navbarColor: "bg-primary", navTextColor: "white" }));
+    // stop loading once user context is available
+    if (user) setLoading(false);
+  }, [setDesign, user]);
 
   const handleCancel = async (ticketNumber) => {
     if (!ticketNumber) return
@@ -51,19 +53,23 @@ const MyBookings = () => {
       return
     }
 
-    // Optimistic update
-    const prev = user.bookings || []
-    const updated = prev.map((b) => (b.ticketNumber === ticketNumber ? { ...b, status: 'cancelled' } : b))
-    setUser({ ...user, bookings: updated })
+    // Optimistic update (keep a copy for rollback)
+    const prevBookings = user?.bookings ? [...user.bookings] : []
+    const updated = prevBookings.map((b) => (b.ticketNumber === ticketNumber ? { ...b, status: 'cancelled' } : b))
+    setUser((u) => ({ ...u, bookings: updated }))
     setConfirming(null)
 
     try {
-      const res = await axios.put(
-        `${API_URL}/${userId}/cancel/${ticketNumber}`,
+      // server endpoint: POST /api/bookings/:ticketNumber/cancel
+      const res = await axios.post(
+        `${API_URL}/bookings/${ticketNumber}/cancel`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
-      setUser((prevUser) => ({ ...prevUser, bookings: res.data.updatedBookings }))
+      // if server returns updated bookings array, use it; else keep optimistic
+      if (res.data?.updatedBookings) {
+        setUser((prevUser) => ({ ...prevUser, bookings: res.data.updatedBookings }))
+      }
 
       setUndoInfo({ ticketNumber, message: `Cancelled ${ticketNumber}` })
       if (undoTimer.current) clearTimeout(undoTimer.current)
@@ -71,7 +77,7 @@ const MyBookings = () => {
     } catch (err) {
       setError(err.response?.data?.message || 'Error cancelling booking')
       // Rollback optimistic update
-      setUser((prevUser) => ({ ...prevUser }))
+      setUser((prevUser) => ({ ...prevUser, bookings: prevBookings }))
     } finally {
       setProcessing(false)
     }
@@ -111,7 +117,8 @@ const MyBookings = () => {
 
 
   return (
-    <div className="myBookingBox p-6 mt-5">
+    <div className="myBookingBox ">
+      <div className='h-20'></div>
       <h2 className="text-4xl mb-4">My Bookings</h2>
 
       {error && <div className="text-red-600 mb-3">{error}</div>}
@@ -127,7 +134,7 @@ const MyBookings = () => {
           </div>
         </div>
       ) : (
-        <div className="allBookings grid gap-3">
+        <div className="allBookings grid gap-4">
           {sortedBookings.map((b) => (
             <div
               key={b.ticketNumber}
