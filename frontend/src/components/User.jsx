@@ -50,12 +50,14 @@ const User = () => {
     <>
       {login && notificationBanner}
       {login && (
+        <>
+        <div className='h-[6rem]'></div>
         <div className="userMainBox p-2 sm:p-4 md:p-6 mx-auto my-2 space-y-6 max-w-full md:max-w-4xl lg:max-w-5xl">
           {/* Summary Card */}
           <div className="w-full flex justify-center mb-4">
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 bg-slate-800 rounded-xl shadow-lg px-4 sm:px-8 py-4 text-center">
               <div>
-                <div className="text-2xl font-bold text-primary">{user && user.bookings ? user.bookings.length : 0}</div>
+                <div className="text-2xl font-bold text-red-500">{user && user.bookings ? user.bookings.length : 0}</div>
                 <div className="text-sm text-gray-300">Total Trips</div>
               </div>
               <div>
@@ -288,6 +290,7 @@ const User = () => {
             </div>
           </div>
         </div>
+        </>
       )}
     </>
   );

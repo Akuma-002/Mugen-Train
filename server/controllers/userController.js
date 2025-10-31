@@ -3,31 +3,57 @@ const bcrypt = require('bcrypt');
 
 
 const signUp = async (req, res) => {
-    try {
-        const { name, email, password, phone } = req.body;
+  try {
+    console.log('SignUp request body:', req.body);
+    const { name, email, password, phone, aadhar } = req.body;
 
-        if(!name || !email || !password || !phone) {
-            return res.status(400).json({ message: "All fields are required" });
-        }
-        const  existingUser = await User.findOne({ email });   
-        if(existingUser) {
-            return res.status(400).json({ message: "User already exists" });
-        }
-        const newUser = await User.create({name, email, password, phone});
-        res.status(201).json({
-            success: true,
-            message: "User registered successfully",
-            user: {
-                id: newUser._id,
-                name: newUser.name,
-                email: newUser.email,
-                phone: newUser.phone,
-                role: newUser.role,
-            },
-    });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+    if (!name || !email || !password || !phone) {
+      return res.status(400).json({ message: "All fields are required" });
     }
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ message: "User already exists" });
+    }
+
+    // Hash password before creating user
+
+    const newUser = await User.create({
+      name,
+      email,
+      password,
+      phone,
+      bookings: [], // ensure new users start with null bookings
+    });
+
+    res.status(201).json({
+      success: true,
+      message: "User registered successfully",
+      user: {
+        id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+        phone: newUser.phone,
+        role: newUser.role,
+        bookings: newUser.bookings ?? null,
+      },
+    });
+  } catch (error) {
+    // Better error responses and logging
+    console.error('SignUp error:', error && error.stack ? error.stack : error);
+
+    // Duplicate key (unique index) error
+    if (error && error.code === 11000) {
+      const key = Object.keys(error.keyValue || {})[0] || 'field';
+      return res.status(409).json({ message: `Duplicate value for ${key}` });
+    }
+
+    if (error && error.name === 'ValidationError') {
+      return res.status(400).json({ message: error.message });
+    }
+
+    return res.status(500).json({ message: error.message || 'Internal server error' });
+  }
 };
 const jwt = require('jsonwebtoken');
 
@@ -44,16 +70,18 @@ const login = async (req, res) => {
 
         const existingUser = await User.findOne({ email }).select("+password");
         if (!existingUser) {
+          console.log("No user found with email:", email);
             return res.status(400).json({ message: "User not found" });
         }
 
         console.log("Stored password (hashed):", existingUser.password);
-
+        console.log("Comparing with password:", password);
         if (!existingUser.password) {
             return res.status(500).json({ message: "Password missing in DB" });
         }
 
         const isMatch = await bcrypt.compare(password, existingUser.password);
+        console.log("Password match result:", isMatch);
         if (!isMatch) {
             return res.status(401).json({ message: "Invalid password" });
         }

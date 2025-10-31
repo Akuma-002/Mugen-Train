@@ -12,7 +12,8 @@ const SignUp = () => {
     phone: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+
   });
 
   const [passwordError, setPasswordError] = useState('');
@@ -52,7 +53,7 @@ const SignUp = () => {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          password: formData.password
+          password: formData.password,
         }
       );
       if (response.data.success) {

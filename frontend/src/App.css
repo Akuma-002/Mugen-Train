@@ -27,6 +27,33 @@ input[type=number] {
 body{
   /* overflow: hidden; */
 }
+nav{
+  background: transparent;
+  z-index: 999;
+  font-family: "Momo Trust Display", sans-serif;
+}
+nav.scrolled {
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+#loginButton{
+  width: 4.5rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.5rem;
+    padding: 0;
+}
+#signUpButton{
+    width: 4.6rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.5rem;
+    padding: 0;
+}
 main{
   min-height: 100vh;
   display: block;
@@ -36,6 +63,10 @@ main{
   padding: 1rem;
   background: #fff;
   color: #222;
+  
+}
+main h1{
+  font-family: "Momo Trust Display", sans-serif;
 }
 .subMain{
   position: relative;

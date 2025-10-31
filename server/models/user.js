@@ -30,9 +30,8 @@ const userSchema = new mongoose.Schema({
     },
     //Aadhar Number
     aadhar: {
-        type: String,   
-        required: true,
-        unique: true,
+        type: String,
+        sparse: true, // This allows multiple null values
         match: [/^\d{12}$/, "Please provide a valid 12-digit Aadhar number"],
     },
     // Address
@@ -139,5 +138,4 @@ userSchema.pre("save", async function (next) {
 });
 const User = mongoose.model("User", userSchema);
 module.exports = User;
-
 
