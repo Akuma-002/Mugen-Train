@@ -118,7 +118,7 @@ const MyBookings = () => {
 
   return (
     <div className="myBookingBox ">
-      <div className='h-20'></div>
+      <div className='h-20 m-5'></div>
       <h2 className="text-4xl mb-4">My Bookings</h2>
 
       {error && <div className="text-red-600 mb-3">{error}</div>}

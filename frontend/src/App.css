@@ -136,6 +136,7 @@ footer{
   align-items: center;
   width: 100%;
   max-width: 100%;
+  margin-bottom: 0;
 }
 .userBox{
   padding: 2rem;
@@ -149,11 +150,16 @@ footer{
   align-items: center;
 }
 .tabs{
-  max-width: 40%;
+  max-width: 35rem;
   border: 0;
   display: flex;
   justify-content: space-between;
+  width: 70%;
 }
+.tabs-container{
+  width: 75%;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -631,4 +637,32 @@ footer{
   background: transparent;
   color: inherit;
   border: 1px solid rgba(255,255,255,0.12);
+}
+/* Footer animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.footer-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Enhanced backdrop blur */
+.backdrop-blur-custom {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Gradient text animation */
+@keyframes gradient-text {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-text {
+  background-size: 200% auto;
+  animation: gradient-text 4s linear infinite;
 }
