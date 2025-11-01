@@ -128,6 +128,9 @@ const handleCancel = async (ticketNumber) => {
   const qrValue = buildPayload(booking, user);
 
   return (
+    <>
+    <div className='h-20'></div>
+    <div className='h-10'></div>
     <div className="ticketBox printFriendly">
       <div className="ticketHeader">
         <div>
@@ -218,6 +221,7 @@ const handleCancel = async (ticketNumber) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
