@@ -3,11 +3,12 @@ import axios from 'axios';
 import { TrainListContext } from './context/TrainList';
 import { useNavigate } from 'react-router-dom';
 import { DesignContext } from './context/DesignInfo';
-
+import { SearchInfoContext } from './context/SearchInfo.jsx';
 const TRAIN_URL = import.meta.env.VITE_TRAIN_SERVER_API;
 const Home = () => {
   const { trains, setTrains } = useContext(TrainListContext);
   const { setDesign } = useContext(DesignContext);
+  const { setSearchInfo } = useContext(SearchInfoContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     source: '',
@@ -37,6 +38,8 @@ const Home = () => {
       .then((res) => {
         console.log(res.data);
         setTrains(res.data);
+        setSearchInfo(formData);
+        console.log("Train",trains);
         navigate('/trains');
       })
       .catch(err => console.error(err));

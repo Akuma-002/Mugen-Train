@@ -72,7 +72,7 @@ router.post('/find', async (req, res) => {
       }
     }
 
-    console.log("Trains found:", results.length);
+    console.log("Trains found:", results);
     res.json(results);
 
   } catch (err) {

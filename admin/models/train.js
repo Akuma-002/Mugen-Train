@@ -30,8 +30,9 @@ const trainSchema = new mongoose.Schema({
   train_number: { type: Number, required: true, unique: true },
   departure_station: { type: String, required: true },
   arrival_station: { type: String, required: true },
-  departure_time: { type: Date, required: true },
+  departure_time: { type: String, required: true },
   arrival_time: { type: Date, required: true },
+  total_time: { type: String, required: true },
   days_of_operation: [{ type: String, required: true }],
 
   // Nested object for different classes

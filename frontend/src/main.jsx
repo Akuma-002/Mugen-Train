@@ -7,19 +7,22 @@
 import UserInfo from './components/context/UserInfo.jsx'
 import TrainList from './components/context/TrainList.jsx'
 import DesignInfo from './components/context/DesignInfo.jsx'
+import SearchInfo from './components/context/SearchInfo.jsx'
   createRoot(document.getElementById('root')).render(
 
     <StrictMode>
+      <SearchInfo>
       <LoginInfo>
         <UserInfo>
           <TrainList>
             <DesignInfo>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-          </DesignInfo>
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+            </DesignInfo>
           </TrainList>
         </UserInfo>
       </LoginInfo>
+      </SearchInfo>
     </StrictMode>,
-  )
+    )
