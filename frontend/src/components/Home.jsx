@@ -10,8 +10,8 @@ const Home = () => {
   const { setDesign } = useContext(DesignContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    from: '',
-    to: '',
+    source: '',
+    destination: '',
     date: '',
     trainClass: '',
     passengers: 1,
@@ -27,11 +27,12 @@ const Home = () => {
       ...prev,
       [id]: value,
     }));
+    console.log(formData);
   };
 
   const handleSearch = async () => {
     console.log('Search data:', formData);
-    alert(`Searching trains from ${formData.from} to ${formData.to} on ${formData.date}`);
+    alert(`Searching trains from ${formData.source} to ${formData.destination} on ${formData.date}`);
     await axios.post(`${TRAIN_URL}/trains/find`, formData)
       .then((res) => {
         console.log(res.data);
@@ -41,11 +42,11 @@ const Home = () => {
       .catch(err => console.error(err));
   };
 
-  const handleBookNow = (from, to) => {
+  const handleBookNow = (source, destination) => {
     setFormData((prev) => ({
       ...prev,
-      from,
-      to,
+      source,
+      destination,
     }));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -90,7 +91,7 @@ const Home = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     From
                   </label>
-                  <input id="from" placeholder="Departure city" value={formData.from} onChange={handleChange}
+                  <input id="from" placeholder="Departure city" value={formData.source} onChange={handleChange}
                     className="h-10 w-full rounded-lg bg-slate-900 border border-slate-700 px-3 text-slate-100 placeholder:text-slate-500 focus:ring-2 focus:ring-primary/30 outline-none" />
                 </div>
 
@@ -99,7 +100,7 @@ const Home = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     To
                   </label>
-                  <input id="to" placeholder="Destination city" value={formData.to} onChange={handleChange}
+                  <input id="to" placeholder="Destination city" value={formData.destination} onChange={handleChange}
                     className="h-10 w-full rounded-lg bg-slate-900 border border-slate-700 px-3 text-slate-100 placeholder:text-slate-500 focus:ring-2 focus:ring-primary/30 outline-none" />
                 </div>
 
@@ -143,7 +144,7 @@ const Home = () => {
                   Search Trains
                 </button>
 
-                <button onClick={() => { setFormData({ from: '', to: '', date: '', trainClass: '', passengers: 1 }); }}
+                <button onClick={() => { setFormData({ source: '', destinationx: '', date: '', trainClass: '', passengers: 1 }); }}
                   className="text-slate-300 px-4 py-2 rounded-lg border border-slate-700 hover:bg-slate-800 transition">
                   Reset
                 </button>
