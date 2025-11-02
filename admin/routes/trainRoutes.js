@@ -36,4 +36,52 @@ router.post('/all',(req, res) => {
   } 
 });
 
+// Find trains by source and destination
+router.post('/find', async (req, res) => {
+  const { source, destination } = req.body;
+  console.log("Finding trains from city", source, "to city", destination);
+
+  if (!source || !destination) {
+    return res.status(400).json({ error: 'Source and destination required.' });
+  }
+
+  try {
+    const trains = await trainModel.find({});
+    const results = [];
+
+    for (const train of trains) {
+      // Convert Map to array for ordered traversal
+      const routes = Array.from(train.train_route.values());
+
+      let sourceIndex = -1;
+      let destinationIndex = -1;
+
+      // Find indexes of source and destination
+      routes.forEach((route, idx) => {
+        if ((route.city).toLocaleLowerCase() === source.toLocaleLowerCase() && sourceIndex === -1) {
+          sourceIndex = idx;
+        }
+        if ((route.city).toLocaleLowerCase() === destination.toLocaleLowerCase()) {
+          destinationIndex = idx;
+        }
+      });
+
+      // Ensure both exist and destination comes after source
+      if (sourceIndex !== -1 && destinationIndex !== -1 && destinationIndex > sourceIndex) {
+        results.push(train);
+      }
+    }
+
+    console.log("Trains found:", results.length);
+    res.json(results);
+
+  } catch (err) {
+    console.error('Train search error:', err);
+    res.status(500).json({ error: 'Internal Server Error.' });
+  }
+});
+
+
+
+
 module.exports = router;

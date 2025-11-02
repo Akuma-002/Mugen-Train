@@ -25,7 +25,7 @@ function App() {
           <Route path='/book-ticket' element={<BookTicket />} />
           <Route path='/my-bookings' element={<MyBookings />} />
           <Route path='/ticket/:id' element={<Ticket />} />
-          <Route path='/contact' element={<Contact />} />
+          <Route path='/contact' element={<Contact/>} />
           <Route path='/user' element={<User />} />
           <Route path='/edit-profile' element={<EditProfile />} />
           <Route path='/trains' element={<Trains />} />

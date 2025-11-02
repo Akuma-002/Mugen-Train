@@ -32,7 +32,7 @@ const Home = () => {
   const handleSearch = async () => {
     console.log('Search data:', formData);
     alert(`Searching trains from ${formData.from} to ${formData.to} on ${formData.date}`);
-    await axios.post(`${TRAIN_URL}/trains/all`, formData)
+    await axios.post(`${TRAIN_URL}/trains/find`, formData)
       .then((res) => {
         console.log(res.data);
         setTrains(res.data);
