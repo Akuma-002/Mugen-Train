@@ -71,14 +71,14 @@ const Trains = () => {
       {trains.map((train, index) => (
         <div
           key={index}
-          className="trainCard bg-white bg-opacity-90 rounded-3xl p-8 mb-10 shadow-xl hover:shadow-3xl border-4 border-indigo-100 hover:border-indigo-400 transition duration-500"
+          className="trainCard bg-white bg-opacity-90 rounded-3xl py-2 px-10 mb-10 shadow-xl hover:shadow-3xl border-4 border-indigo-100 hover:border-indigo-400 transition duration-500"
         >
           <h3 className="trainName text-3xl font-extrabold text-indigo-900 mb-6 tracking-wide font-serif select-none">
             {train.train_name}{' '}
             <span className="font-extrabold text-indigo-400">#{train.train_number}</span>
           </h3>
 
-          <div className="flex items-center justify-between mb-6 gap-12 select-none">
+          <div className="flex items-center justify-between mb-2 gap-12 select-none">
             {/* Departure */}
             <div>
               <p className="departureTime text-xl font-mono text-indigo-800 bg-indigo-100 px-5 py-2 rounded-full shadow-inner inline-block tracking-wide">
@@ -120,20 +120,20 @@ const Trains = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-between gap-12 my-6 select-none text-indigo-600 font-semibold tracking-wide text-lg">
+          <div className="flex items-center justify-between gap-12 my-6 select-none text-indigo-600 font-semibold tracking-wide text-lg my-1">
             <p>{searchInfo.source}</p>
             <FontAwesomeIcon icon={faArrowRightArrowLeft} className="text-indigo-400 text-2xl" />
             <p>{searchInfo.destination}</p>
           </div>
 
-          <p className="text-indigo-700 text-xl font-semibold mb-6 tracking-widest select-none">
+          <p className="text-indigo-700 text-xl font-semibold mb-2 tracking-widest select-none">
             {(() => {
               const totalTime = train.total_time.replace(':', 'h ') + 'm';
               return totalTime;
             })()}
           </p>
 
-          <div className="flex gap-6 mb-8">
+          <div className="flex gap-6 mb-3">
             <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-3 rounded-3xl hover:from-purple-700 hover:to-indigo-700 shadow-lg font-extrabold tracking-wide transition-transform transform hover:scale-105">
               Book Now
             </Button>
@@ -144,7 +144,42 @@ const Trains = () => {
               {!routeVisible? 'Hide Route' : 'View Route'}
             </Button>
           </div>
-
+            {/* Seats */}
+            <div className='seatsBox flex justify-evenly'>
+              {Object.values(train.classes_available).map((seat, idx) => (
+                <div className=''>
+                <div key={idx} className={`seatInfo inline-block bg-indigo-50 bg-opacity-70 border border-indigo-200 rounded px-2 py-1  mb-1 shadow-sm w-40 ${(()=>{
+                  let availability = seat.confirmation_chance;
+                  availability = availability.replace('%', '');
+                  if (parseInt(availability) >= 75) return 'bg-green-400'
+                  else if (parseInt(availability) >= 50) return 'bg-yellow-400'
+                  else return 'bg-red-400';
+                })()}`}>
+                  <h4 className="seatClass text-indigo-900 mb-2 tracking-wide select-none ">
+                    {seat.class_name}
+                  </h4>
+                  <div className='flex justify-between'>
+                    <p className="seatType text-black font-bold select-none text-left text-sm">
+                    {seat.class_type}
+                  </p>
+                  <p className={`font-bold ${(()=>{
+                  let availability = seat.confirmation_chance;
+                  availability = availability.replace('%', '');
+                  if (parseInt(availability) >= 75) return 'text-green-700'
+                  else if (parseInt(availability) >= 50) return 'text-yellow-700'
+                  else return 'text-red-700';
+                })()}`}>
+                    {seat.status}
+                  </p>
+                  </div>
+                  <p className="seatFare text-gray-500 select-none text-left text-xs">
+                    ₹{seat.fare}
+                  </p>
+                </div>
+                <p className='text-xs'>{seat.confirmation_chance} Chance</p>
+                </div>
+              ))}
+            </div>
           <div
             className={`routes mt-6 transition-opacity duration-700 ease-in-out ${
               routeVisible ? 'hidden' : ''

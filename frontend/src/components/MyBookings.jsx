@@ -107,7 +107,7 @@ const MyBookings = () => {
 
   return (
     <>
-    <div className='h-20'></div>
+    <div className='manager'></div>
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-100 pt-12 pb-20">
       <div className="mx-auto max-w-4xl px-5">
         <h2 className="text-4xl font-extrabold text-center mb-8 text-gray-800">My Bookings</h2>

@@ -112,7 +112,7 @@ const Ticket = () => {
 
   return (
     <>
-    <div className='h-20'></div>
+    <div className='manager'></div>
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-100 py-12 px-5 print:bg-white">
       <div className="max-w-3xl mx-auto">
         <div className="rounded-3xl shadow-2xl bg-white/70 backdrop-blur-lg p-8 border border-gray-200 print:shadow-none print:border print:p-2">

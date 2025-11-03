@@ -12,7 +12,7 @@ const Footer = () => {
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-4">
           {/* Brand Section */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3 group">
