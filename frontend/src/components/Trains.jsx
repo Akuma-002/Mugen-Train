@@ -4,12 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { SearchInfoContext } from './context/SearchInfo.jsx';
 import { Button } from './ui/Button.jsx';
-
+import { TrainOneContext } from './context/TrainOne.jsx';
+import {useNavigate} from 'react-router-dom';
 const Trains = () => {
   const { trains } = useContext(TrainListContext);
   const { searchInfo } = useContext(SearchInfoContext);
   const [routeVisible, setRouteVisible] = useState(true);
-
+  const {setTrainOne} = useContext(TrainOneContext);
+  const navigate = useNavigate();
   if (!trains || trains.length === 0) {
     return (
       <div className="noTrains text-center text-gray-600 mt-24 text-xl bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 p-12 rounded-3xl shadow-xl font-semibold tracking-wide">
@@ -120,7 +122,7 @@ const Trains = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-between gap-12 my-6 select-none text-indigo-600 font-semibold tracking-wide text-lg my-1">
+          <div className="flex items-center justify-between gap-12 select-none text-indigo-600 font-semibold tracking-wide text-lg my-1">
             <p>{searchInfo.source}</p>
             <FontAwesomeIcon icon={faArrowRightArrowLeft} className="text-indigo-400 text-2xl" />
             <p>{searchInfo.destination}</p>
@@ -134,7 +136,10 @@ const Trains = () => {
           </p>
 
           <div className="flex gap-6 mb-3">
-            <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-3 rounded-3xl hover:from-purple-700 hover:to-indigo-700 shadow-lg font-extrabold tracking-wide transition-transform transform hover:scale-105">
+            <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-3 rounded-3xl hover:from-purple-700 hover:to-indigo-700 shadow-lg font-extrabold tracking-wide transition-transform transform hover:scale-105" onClick={(()=>{
+              setTrainOne(train);
+              navigate('/book-ticket');
+            })}>
               Book Now
             </Button>
             <Button

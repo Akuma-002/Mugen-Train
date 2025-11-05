@@ -190,8 +190,7 @@ const EditProfile = () => {
             <button
               type="submit"
               style={{ backgroundColor: '#ED4059' }}
-              className="text-white px-8 py-3 rounded-full text-base font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-pink-400"
-            >
+              className="text-white px-8 py-3 rounded-full text-base font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-pink-400">
               Save Changes
             </button>
           </div>

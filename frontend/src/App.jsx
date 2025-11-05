@@ -29,6 +29,7 @@ function App() {
           <Route path='/user' element={<User />} />
           <Route path='/edit-profile' element={<EditProfile />} />
           <Route path='/trains' element={<Trains />} />
+          <Route path='/book-ticket' element={<BookTicket />} />
         </Route>
 
         {/* Pages without Navbar & Footer */}

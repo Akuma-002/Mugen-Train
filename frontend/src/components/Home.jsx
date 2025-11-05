@@ -13,7 +13,7 @@ const Home = () => {
   const [formData, setFormData] = useState({
     source: '',
     destination: '',
-    date: '',
+    date: new Date().toISOString().split('T')[0],
     trainClass: '',
     passengers: 1,
   });
@@ -33,7 +33,7 @@ const Home = () => {
 
   const handleSearch = async () => {
     console.log('Search data:', formData);
-    alert(`Searching trains from ${formData.source} to ${formData.destination} on ${formData.date}`);
+    /*alert(`Searching trains from ${formData.source} to ${formData.destination} on ${formData.date}`);*/
     await axios.post(`${TRAIN_URL}/trains/find`, formData)
       .then((res) => {
         console.log(res.data);
