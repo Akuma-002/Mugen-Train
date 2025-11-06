@@ -152,7 +152,33 @@ const updateUser = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
+const ticketBooking = async (req, res)=>{
+  try{
+    const {booking} = req.body;
+    const {email} = req.body;
+    console.log(booking);
+    if(!email){
+      return res.status(401).json({ message: "Unauthorized: User ID missing" });
+    }
+    if (!booking) {
+      return res.status(400).json({ message: "Ticket is required" });
+    }
+    const user = await User.findOne({email});
+    if(!user){
+      return res.status(404).json({ message: "User not found" });
+    }
+    user.bookings.push(booking);
+    await user.save();
+    console.log("Booked");
+    return res.json({
+      success: true,
+      message: "Booked successfully",
+      updatedBookings: user.bookings,
+    });
+  }catch (error){
+    console.log(error);
+  }
+}
 const cancelBooking = async (req, res) => {
   try {
     const { ticketNumber } = req.params;
@@ -175,7 +201,7 @@ const cancelBooking = async (req, res) => {
     }
 
     // Find booking by exact ticketNumber match (consider case sensitivity as per your app needs)
-    const booking = user.bookings.find(b => b.ticketNumber === ticketNumber);
+    const booking = user.bookings.find(b => b.ticketNumber.toLowerCase() === ticketNumber.toLowerCase());
     if (!booking) {
       return res.status(404).json({ message: "Booking not found" });
     }
@@ -201,5 +227,42 @@ const cancelBooking = async (req, res) => {
   }
 };
 
+const refreshData = async (req, res) => {
+  const { email } = req.body;
 
-module.exports = { signUp, login, updateUser, cancelBooking };
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // No token generation here, since this is just a data refresh
+    return res.status(200).json({
+      success: true,
+      message: "User data refreshed successfully",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+        address: user.address,
+        state: user.state,
+        district: user.district,
+        city: user.city,
+        pinCode: user.pinCode,
+        dob: user.dob,
+        aadhar: user.aadhar,
+        bookings: user.bookings,
+        walletBalance: user.walletBalance,
+      },
+    });
+  } catch (error) {
+    console.error("Error refreshing user data:", error);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+
+module.exports = { signUp, login, updateUser, cancelBooking, ticketBooking, refreshData};

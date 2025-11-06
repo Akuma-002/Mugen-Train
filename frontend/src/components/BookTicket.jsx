@@ -3,13 +3,16 @@ import { TrainOneContext } from './context/TrainOne.jsx';
 import { UserContext } from './context/UserInfo.jsx';
 import { SearchInfoContext } from './context/SearchInfo.jsx';
 import { BookingInfoContext } from './context/BookingInfo.jsx';
+import { useNavigate } from 'react-router-dom';
+
 const BookTicket = () => {
+  const navigate = useNavigate();
   const {trainOne} = useContext(TrainOneContext);
   const {user} = useContext(UserContext);
   const {searchInfo} = useContext(SearchInfoContext);
   const {booking, setBooking} = useContext(BookingInfoContext);
   const [addTravller, setAddTravller] = useState(false);
-  const [seatClass, setSeatClass] = useState("");
+  const [seatClass, setSeatClass] = useState("3AC");
   const [newTravaller, setNewTravller] = useState({
     name: '',
         email: '',
@@ -69,6 +72,7 @@ const BookTicket = () => {
       status: "booked"
     })
     console.log("Train booked -------", booking);
+    navigate('/payment')
   }
   return (
     <div className=''>
@@ -180,9 +184,9 @@ const BookTicket = () => {
                   <div className='flex flex-col mx-8'>
                     <label htmlFor="berth" className='text-xs text-gray-500 text-left'>Class</label>
                     <select name="berth" id="berth" className='boder border-b-2 bg-transparent' value={seatClass} onChange={(e)=>{setSeatClass(e.target.value)}}>
-                      <option value="1A">1A</option>
-                      <option value="2A">2A</option>
-                      <option value="3A">3A</option>
+                      <option value="1AC">1AC</option>
+                      <option value="2AC">2AC</option>
+                      <option value="3AC">3AC</option>
                       <option value="Sleeper">Sleeper</option>
                       <option value="Genral">Genral</option>
                     </select>
@@ -249,7 +253,7 @@ const BookTicket = () => {
                   </div>
                   <div className='flex flex-col mx-8'>
                     <label htmlFor="berth" className='text-xs text-gray-500 text-left'>Class</label>
-                    <select name="berth" id="berth" className='boder border-b-2 bg-transparent'>
+                    <select name="berth" id="berth" className='boder border-b-2 bg-transparent' value={seatClass} onChange={(e) => setSeatClass(e.target.value)}>
                       <option value="1A">1A</option>
                       <option value="2A">2A</option>
                       <option value="3A">3A</option>

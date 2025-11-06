@@ -94,7 +94,6 @@ const userSchema = new mongoose.Schema({
             // Note: 'unique' removed because unique indexes on nested array fields can cause
             // unexpected global uniqueness constraints and write failures when updating subdocuments.
             ticketNumber: { type: String, required: true },
-            trainId: { type: mongoose.Schema.Types.ObjectId, ref: "Train", required: true },
             trainName: { type: String, required: true },
             trainNumber: { type: String, required: true },
             bookingDate: { type: Date, default: Date.now },
@@ -107,8 +106,7 @@ const userSchema = new mongoose.Schema({
             seatNumbers: [String], // Example: ["A1", "A2"]
             class: {
                 type: String,
-                enum: ["sleeper", "3AC", "2AC", "1AC"],
-                required: true,
+                enum: ["sleeper", "3AC", "2AC", "1AC", ],
             },
             totalFare: {
                 type: Number,

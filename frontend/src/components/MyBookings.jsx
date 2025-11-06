@@ -33,45 +33,34 @@ const MyBookings = () => {
   }, [setDesign, user])
 
   const handleCancel = async (ticketNumber) => {
-    if (!ticketNumber) return
-    setProcessing(true)
-    setError(null)
-    const token = localStorage.getItem('authToken')
-    if (!token) {
-      alert('You need to be logged in to cancel bookings. Redirecting to login...')
-      navigate('/login')
-      setProcessing(false)
-      return
-    }
-    const userId = user?._id || user?.id
-    if (!userId) {
-      setError('User information missing. Please login again.')
-      setProcessing(false)
-      return
-    }
-    const prevBookings = user?.bookings ? [...user.bookings] : []
-    const updated = prevBookings.map((b) => (b.ticketNumber === ticketNumber ? { ...b, status: 'cancelled' } : b))
-    setUser((u) => ({ ...u, bookings: updated }))
-    setConfirming(null)
+    if (!ticketNumber) return;
+    setProcessing(true);
+    setError(null);
     try {
-      const res = await axios.post(
-        `${API_URL}/bookings/${ticketNumber}/cancel`,
+      const token = localStorage.getItem('authToken');
+      if (!token) {
+        alert("You need to be logged in to cancel bookings. Redirecting to login...");
+        navigate('/login');
+        return;
+      }
+      const userId = user?._id || user?.id;
+      if (!userId) {
+        setError("User information missing. Please login again.");
+        return;
+      }
+      const res = await axios.put(
+        `${API_URL}/${userId}/cancel/${ticketNumber}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
-      )
-      if (res.data?.updatedBookings) {
-        setUser((prevUser) => ({ ...prevUser, bookings: res.data.updatedBookings }))
-      }
-      setUndoInfo({ ticketNumber, message: `Cancelled ${ticketNumber}` })
-      if (undoTimer.current) clearTimeout(undoTimer.current)
-      undoTimer.current = setTimeout(() => setUndoInfo(null), 5000)
+      );
+      alert(res.data.message);
+      setUser(prev => ({ ...prev, bookings: res.data.updatedBookings }));
     } catch (err) {
-      setError(err.response?.data?.message || 'Error cancelling booking')
-      setUser((prevUser) => ({ ...prevUser, bookings: prevBookings }))
+      setError(err.response?.data?.message || "Error cancelling booking");
     } finally {
-      setProcessing(false)
+      setProcessing(false);
     }
-  }
+  };
 
   const handleView = (ticketNumber) => {
     navigate(`/ticket/${ticketNumber}`)
@@ -168,7 +157,7 @@ const MyBookings = () => {
                       <>
                         <Button
                           className={`px-4 py-2 text-white bg-pink-500 rounded-full shadow hover:bg-pink-600 active:bg-pink-700 transition 
-                            ${b.status === 'completed' ? 'hidden' : ''} `}
+                            ${b.status === 'completed' ? 'hidden' : 'hidden'} `}
                           disabled={processing}
                           onClick={() => setConfirming(b.ticketNumber)}
                           aria-label={`Cancel ${b.ticketNumber}`}
