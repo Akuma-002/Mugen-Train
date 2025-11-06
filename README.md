@@ -87,3 +87,69 @@ India’s train network handles over 20 million passengers daily. However, most 
 ---
 
 ## 🏗️ System Architecture
+      +--------------------+
+      |      React UI      |
+      +---------+----------+
+                |
+                v
+      +--------------------+
+      |   Express Server   |
+      |  (Node.js / API)   |
+      +---------+----------+
+                |
+      +---------v----------+
+      |    MongoDB Atlas    |
+      +---------------------+
+                |
+      +---------v----------+
+      |   Python Module    |
+      | Seat Allocation /  |
+      |  PNR Generation    |
+      +--------------------+
+
+**Key Insight:**  
+- The Python module can operate as a microservice or internal script.  
+- All major user flows are API-driven — ideal for scaling or mobile integration.
+
+---
+
+## 🔄 Workflow
+1. **User Registration/Login**
+   - Authenticated via JWT; credentials stored securely.
+2. **Train Search**
+   - Frontend calls `/api/trains/find` with source & destination.
+3. **Booking**
+   - Backend verifies train availability.
+   - Python module assigns seat and PNR.
+4. **Payment Simulation**
+   - Mock confirmation triggers booking record creation.
+5. **Booking History**
+   - User retrieves all booked tickets.
+6. **Cancellation**
+   - Ticket is marked canceled; seat re-added to availability pool.
+
+---
+
+## 🧾 API Endpoints
+| Endpoint | Method | Description |
+|-----------|---------|-------------|
+| `/api/auth/register` | POST | Register new user |
+| `/api/auth/login` | POST | Authenticate user |
+| `/api/trains/find` | POST | Find trains between stations |
+| `/api/bookings/create` | POST | Create a booking |
+| `/api/bookings/user/:id` | GET | Fetch user’s bookings |
+| `/api/bookings/cancel/:id` | PUT | Cancel a booking |
+| `/api/seat/allocate` | POST | Trigger Python seat allocation |
+
+---
+
+## 🧩 Database Schema (Concept)
+
+### **User**
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "hashedpassword",
+  "bookings": ["bookingId1", "bookingId2"]
+}
