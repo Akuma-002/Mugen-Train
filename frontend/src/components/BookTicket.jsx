@@ -1,14 +1,17 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { TrainOneContext } from './context/TrainOne.jsx';
 import { UserContext } from './context/UserInfo.jsx';
 import { SearchInfoContext } from './context/SearchInfo.jsx';
 import { BookingInfoContext } from './context/BookingInfo.jsx';
 import { useNavigate } from 'react-router-dom';
+import { LoginContext } from "./context/LoginInfo";
 
 const BookTicket = () => {
   const navigate = useNavigate();
   const {trainOne} = useContext(TrainOneContext);
   const {user} = useContext(UserContext);
+  const {login} = useContext(LoginContext);
+  
   const {searchInfo} = useContext(SearchInfoContext);
   const {booking, setBooking} = useContext(BookingInfoContext);
   const [addTravller, setAddTravller] = useState(false);
@@ -74,6 +77,9 @@ const BookTicket = () => {
     console.log("Train booked -------", booking);
     navigate('/payment')
   }
+  useEffect(() => {
+      if (!login) navigate('/login');
+    }, [login, navigate]);
   return (
     <div className=''>
       <div className='manager '></div>
