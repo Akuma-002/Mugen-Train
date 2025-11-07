@@ -150,7 +150,7 @@ const Trains = () => {
             </Button>
           </div>
             {/* Seats */}
-            <div className='seatsBox flex justify-evenly'>
+            <div className='seatsBox flex justify-evenly overflow-scroll'>
               {Object.values(train.classes_available).map((seat, idx) => (
                 <div className=''>
                 <div key={idx} className={`seatInfo inline-block bg-indigo-50 bg-opacity-70 border border-indigo-200 rounded px-2 py-1  mb-1 shadow-sm w-40 ${(()=>{
