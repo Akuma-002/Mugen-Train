@@ -38,9 +38,10 @@ router.post('/all',(req, res) => {
 
 // Find trains by source and destination
 router.post('/find', async (req, res) => {
-  const { source, destination } = req.body;
+  let { source, destination } = req.body;
   console.log("Finding trains from city", source, "to city", destination);
-
+  source = source.trim()
+  destination = destination.trim()
   if (!source || !destination) {
     return res.status(400).json({ error: 'Source and destination required.' });
   }
