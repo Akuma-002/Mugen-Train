@@ -23,13 +23,18 @@ const Home = () => {
   }, [setDesign]);
 
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({
+  const { id, value } = e.target;
+
+  setFormData(prev => {
+    const updated = {
       ...prev,
       [id]: value,
-    }));
-    console.log(formData);
-  };
+    };
+    console.log("Updated formData:", updated);
+    return updated;
+  });
+};
+
 
   const handleSearch = async () => {
     console.log('Search data:', formData);
@@ -94,7 +99,7 @@ const Home = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     From
                   </label>
-                  <input id="from" placeholder="Departure city" value={formData.source} onChange={handleChange}
+                  <input id="source" placeholder="Departure city" value={formData.source} onChange={handleChange}
                     className="h-10 w-full rounded-lg bg-slate-900 border border-slate-700 px-3 text-slate-100 placeholder:text-slate-500 focus:ring-2 focus:ring-primary/30 outline-none" />
                 </div>
 
@@ -103,7 +108,7 @@ const Home = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     To
                   </label>
-                  <input id="to" placeholder="Destination city" value={formData.destination} onChange={handleChange}
+                  <input id="destination" placeholder="Destination city" value={formData.destination} onChange={handleChange}
                     className="h-10 w-full rounded-lg bg-slate-900 border border-slate-700 px-3 text-slate-100 placeholder:text-slate-500 focus:ring-2 focus:ring-primary/30 outline-none" />
                 </div>
 
