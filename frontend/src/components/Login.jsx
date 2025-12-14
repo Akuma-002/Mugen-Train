@@ -99,7 +99,7 @@ const Login = () => {
         >
           Login
         </button>
-        <p>Don't have an account <NavLink to={"/signup"}>Sign Up</NavLink></p>
+        <p>Don't have an account <NavLink className={"text-blue-700"} to={"/signup"}>Sign Up</NavLink></p>
       </div>
     </form>
   );

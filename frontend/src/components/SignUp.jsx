@@ -74,7 +74,7 @@ const SignUp = () => {
       onSubmit={handleSubmit}
     >
       <h1 className="text-4xl font-bold py-4 text-center">
-        <NavLink to="/" className="text-black">
+        <NavLink to="/" className="text-wheat-500 hover:text-wheat-700">
           Sign Up
         </NavLink>
       </h1>
@@ -172,7 +172,7 @@ const SignUp = () => {
         >
           {loading ? 'Signing Up...' : 'Sign Up'}
         </button>
-        <p>Already have an account <NavLink to={"/login"}>Login</NavLink></p>
+        <p>Already have an account <NavLink className={"text-blue-700"} to={"/login"}>Login</NavLink></p>
       </div>
     </form>
   );
