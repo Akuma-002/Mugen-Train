@@ -216,28 +216,28 @@ Key points:
 
 ```mermaid
 flowchart LR
-  Browser["Browser / Frontend (React)"]
-  UB["User Backend (Node/Express)"]
-  AB["Admin Backend (Node/Express)"]
-  PY["Python Microservice (FastAPI)"]
-  DB["MongoDB"]
-  CACHE["Redis (cache)"]
-  PAY["Payment Gateway"]
-  NOT["Notification Service (Email/SMS)"]
+  Browser[Browser - Frontend]
+  UB[User Backend]
+  AB[Admin Backend]
+  PY[Python Microservice]
+  DB[MongoDB]
+  CACHE[Redis]
+  PAY[Payment Gateway]
+  NOT[Notification Service]
 
-  Browser -->|Search / Booking Requests| UB
-  Browser -->|Admin actions (protected)| AB
-  Browser -->|Search| PY
+  Browser -->|Search & Booking| UB
+  Browser -->|Admin actions| AB
+  Browser -->|Advanced Search| PY
 
-  UB -->|Seat allocation / PNR request| PY
-  PY -->|Train data read| DB
+  UB -->|Allocate seats| PY
+  PY -->|Read trains| DB
   AB -->|Manage trains| DB
-  UB -->|Persist booking| DB
-  PY -->|Cache results / intermediate data| CACHE
-  UB -->|Cache lookups| CACHE
+  UB -->|Save booking| DB
+  PY -->|Cache| CACHE
+  UB -->|Cache| CACHE
 
-  UB -->|Payment| PAY
-  UB -->|Send notification| NOT
+  UB -->|Process payment| PAY
+  UB -->|Notify user| NOT
 ```
 
 You can also view the raw Mermaid file at `docs/diagrams/system-architecture.mmd`.
