@@ -183,6 +183,85 @@ npm run dev
 
 Note: The frontend expects the API at `VITE_SERVER_API` (see [frontend/src/components/Payment.jsx](frontend/src/components/Payment.jsx)).
 
+### Start Website Locally (from GitHub)
+
+Follow these steps on Windows to run the website and backends locally after cloning the repository.
+
+1. Clone the repo:
+
+```bash
+git clone https://github.com/Akuma-002/Mugen-Train.git
+cd Mugen-Train
+```
+
+2. Create `.env` files (example values):
+
+`server/.env`
+```
+PORT=5000
+MONGO_URI=<your_mongo_connection_string>
+JWT_SECRET=your_jwt_secret
+```
+
+`admin/.env`
+```
+TRAIN_URL=<your_train_db_connection_string>
+ADMIN_PORT=5001
+```
+
+`pyadmin/.env`
+```
+TRAIN_URL=<same_train_db_connection_string>
+```
+
+`frontend/.env`
+```
+VITE_SERVER_API=http://localhost:5000
+```
+
+3. Start the user backend (in terminal 1):
+
+```bash
+cd server
+npm install
+npm run dev
+```
+
+4. Start the admin backend (in terminal 2):
+
+```bash
+cd admin
+npm install
+npm run dev
+```
+
+5. (Optional) Start the Python microservice (in terminal 3):
+
+```powershell
+cd pyadmin
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+```
+
+6. Start the frontend (in terminal 4):
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+7. Open `http://localhost:5173` in your browser.
+
+Troubleshooting tips:
+- If Mongo connection fails: verify `MONGO_URI` / `TRAIN_URL`, and ensure Atlas IP whitelist allows your IP or use a local MongoDB instance.
+- If ports are in use: change `PORT`, `ADMIN_PORT` or pass `--port` to `uvicorn` and Vite.
+- If you see CORS errors: ensure backend allows requests from `http://localhost:5173` or adjust `cors()` config.
+- For faster local dev, run server and frontend in separate terminals rather than combining them.
+
+
 <div style="page-break-after: always;"></div>
 
 ## 5. System Architecture & Component Interaction
@@ -261,7 +340,7 @@ Overview: This section lists the project's primary modules and their responsibil
 - Payment & Notifications (simulated/extendable): Payment flow is simulated in `frontend`/`server` and can be replaced with third-party gateways (Stripe/PayPal). Notifications (email/SMS) can be integrated via webhooks or notification services.
 
 - Logging & Monitoring: Instrument server and microservice logs (structured JSON), add health endpoints, and integrate metrics/alerts for uptime and performance.
-
+ 
 
 
 <div style="page-break-after: always;"></div>
