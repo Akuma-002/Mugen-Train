@@ -1,3 +1,36 @@
+# frontend — Mugen-Train (React + Vite)
+
+Short guide for the React frontend.
+
+## Setup
+
+```bash
+cd frontend
+npm install
+```
+
+Set environment variable (optional):
+
+```
+VITE_API_BASE_URL=http://localhost:5000
+```
+
+## Development
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+npm run preview
+```
+
+Notes:
+- Vite default port is `5173`.
+- Frontend components are in `src/components/` and context in `src/components/context/`.
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
